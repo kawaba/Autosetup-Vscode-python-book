@@ -1,0 +1,233 @@
+# Python入門プログラム自動生成ガイドライン
+
+## 概要
+
+このドキュメントは、GitHub Copilotを使用してPython入門向けのソースコードを自動生成する際のガイドラインです。生成されるコードは、初心者向けとして分かりやすく、実践的であることを目指します。
+
+---
+
+## コード生成の指示
+
+### docstringnの利用
+
+- ソースコードファイルに、docstringがすでに書かれている場合は、それをコード生成の指示とする。
+- ソースコードファイルに、docstringがすでに書かれている場合は、内容を変更しないこと。
+
+---
+
+## コード生成のルール
+
+### docstringにより生成するコードの分類
+- 関数のdoctringでは関数を生成する
+- クラスのdocstringではクラスを生成する
+- モジュール全体のdocstringでは、指示されたコードだけを生成し、関数やクラスは生成しない。
+
+### 回答の言語
+- 応答メッセーは**日本語**で表示する
+
+
+### 1. コードの品質基準
+
+#### 必須項目
+- ✅ 関数やクラスにdocstringが書かれていなかった場合は、必ずdocstringを生成して含める
+- ✅ 適切なコメント行を含める（特に複雑な処理）
+- ✅ 指示があれば、型ヒント（Type Hints）を使用する
+- ✅ 指示があれば、エラーハンドリングを実装するが、それ以外は実装しない
+- ✅ 初心者向けの変数名を使用する
+
+#### コードスタイル
+- PEP 8に準拠する（参照：https://www.python.org/dev/peps/pep-0008/）
+- 関数の長さは30行以内を目安とする
+- 1行の長さは79文字以内を目指す
+- わかりやすさを優先する
+- 論理演算子を含む式では、必ず、比較式を()で囲む
+
+
+### 2. 入門者向けの実装ガイドライン
+
+#### 変数名
+- 日本語の説明的な名前を避け、英語の単語を使用
+- 例：`user_age`、`total_score`、`is_valid`
+- 1文字変数（`x`、`y`など）は避ける（ループカウンタ除く）
+
+#### 処理の複雑さ
+- 1つの関数は1つのタスクを実行する（単一責任の原則）
+- 複雑なロジックは複数の小さな関数に分割する
+- 簡潔な処理：ネストは3階層以内
+
+#### エラーハンドリング
+
+- 生成の指示がある時だけエラーハンドリングを実装する
+- 次はエラーハンドリングの生成例：
+
+```python
+# 入力値の検証例
+def process_number(value: str) -> int:
+    """
+    文字列を整数に変換します。
+    
+    引数:
+        value (str): 整数に変換する文字列
+    
+    戻り値:
+        int: 変換された整数
+
+    処理の流れ:
+        1. 文字列を整数に変換
+        2. 変換に失敗した場合は例外を発生させる
+    
+    例外の発生:
+        ValueError: 文字列が整数に変換できない場合
+    """
+    try:
+        result = int(value)
+        return result
+    except ValueError:
+        raise ValueError(f"'{value}' は整数に変換できません")
+```
+
+---
+
+## 生成対象のプログラムレベル
+
+### 初級
+- 変数と型
+- 条件分岐（if/elif/else）
+- ループ（for/while）
+- リスト、辞書などの基本的なデータ構造
+- 関数の基礎
+
+### 中級
+- クラスとオブジェクト
+- モジュールのインポート
+- ファイル入出力
+- 例外処理
+- リスト内包表記
+
+---
+
+## 参照リソース
+
+### 公式ドキュメント
+- **Python公式チュートリアル**: https://docs.python.org/ja/3/tutorial/
+- **PEP 8 - Python Enhancement Proposal**: https://www.python.org/dev/peps/pep-0008/
+- **Google Python スタイルガイド**: https://google.github.io/styleguide/pyguide.html
+
+### 学習リソース
+- **Real Python**: https://realpython.com/ （初心者向け英語記事）
+- **Python公式ドキュメント - 標準ライブラリ**: https://docs.python.org/ja/3/library/
+- **Automate the Boring Stuff with Python**: https://automatetheboringstuff.com/
+
+### 型ヒントについて
+- **PEP 484 - Type Hints**: https://www.python.org/dev/peps/pep-0484/
+- **typing モジュール**: https://docs.python.org/ja/3/library/typing.html
+
+### docstring形式
+- **Google形式ガイド**: https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings
+- **NumPy docstring形式**: https://numpydoc.readthedocs.io/en/latest/format.html
+
+---
+
+## 生成に迷った時のチェックリスト
+
+生成内容に迷った場合は、以下の質問に答えてください：
+
+- [ ] この関数が何をするのか、docstringで明確に説明できるか？
+- [ ] 入力値の型と期待される戻り値の型が明確か？
+- [ ] エラーが発生する可能性のあるシナリオを考慮しているか？
+- [ ] 初心者でも理解できるレベルの複雑さか？
+- [ ] 不要な計算やループはないか？
+- [ ] 変数名は意味が明確か？
+- [ ] PEP 8に準拠しているか？
+- [ ] 実行可能で動作確認ができるか？
+
+---
+
+## 生成例
+
+### 例1：リスト操作の基本
+
+```python
+def find_max_value(numbers: list) -> int:
+    """
+    リストから最大値を見つけます。
+    
+    引数:
+        numbers (list): 整数のリスト
+    
+    戻り値:
+        int: リスト内の最大値
+
+    実行例:
+        >>> find_max_value([3, 1, 4, 1, 5])
+        5
+    """
+     
+    max_num = numbers[0]
+    for num in numbers[1:]:
+        if num > max_num:
+            max_num = num
+    
+    return max_num
+```
+
+### 例2：辞書操作と文字列処理
+
+```python
+def analyze_grades(grades: dict) -> dict:
+    """
+    学生の成績を分析します。
+    
+    引数:
+        grades (dict): 学生名をキー、成績をバリューとする辞書
+    
+    戻り値:
+        dict: 分析結果を含む辞書
+            - 'average': 平均成績
+            - 'highest': 最高成績
+            - 'lowest': 最低成績
+        
+    """
+    if not grades:
+        raise ValueError("成績データが空です")
+    
+    scores = list(grades.values())
+    
+    average = sum(scores) / len(scores)
+    highest = max(scores)
+    lowest = min(scores)
+    
+    return {
+        'average': average,
+        'highest': highest,
+        'lowest': lowest
+    }
+```
+
+---
+
+## 注意事項
+
+### DO（やるべきこと）
+- ✅ コメントで「なぜ」そうするのかを説明する
+- ✅ 実装後にテストコードの例を提示する
+- ✅ 初心者が実行して結果を確認できるようにする
+- ✅ 複数の解法がある場合は、最も読みやすいものを選ぶ
+
+### DON'T（避けるべきこと）
+- ❌ 過度に短い変数名（特に初心者向けコード）
+- ❌ ワンライナーや難読なコード
+- ❌ docstringなしの関数
+- ❌ PEP 8に違反するコード
+
+---
+
+## 更新履歴
+
+| 日付 | 変更内容 |
+|------|--------|
+| 2026-01-06 | 初版作成 |
+
+---
+
+**最終確認**: このガイドラインに従って生成されたコードは、初心者向けのPythonプログラムとして品質が保証されます。
