@@ -148,7 +148,7 @@ $env:PATH = "$PWD\python;$PWD\python\Scripts;$env:PATH"
 & ".\python\python.exe" -m pip install streamlit debugpy pygame arcade pyglet
 & ".\python\python.exe" -m pip install scikit-learn statsmodels sqlalchemy psycopg2-binary
 & ".\python\python.exe" -m pip install pydantic httpx janome rich
-& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/kbinput-1.0.0-py3-none-any.whl
+& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/tkxlib-1.1.1-py3-none-any.whl
 
 Write-Host ""
 
