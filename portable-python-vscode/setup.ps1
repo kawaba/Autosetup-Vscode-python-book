@@ -148,7 +148,7 @@ $env:PATH = "$PWD\python;$PWD\python\Scripts;$env:PATH"
 & ".\python\python.exe" -m pip install streamlit debugpy pygame arcade pyglet
 & ".\python\python.exe" -m pip install scikit-learn statsmodels sqlalchemy psycopg2-binary
 & ".\python\python.exe" -m pip install pydantic httpx janome rich
-& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/kbinput-1.0.0-py3-none-any.whl
+& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/tkxlib-1.1.1-py3-none-any.whl
 
 Write-Host ""
 
@@ -241,7 +241,7 @@ Write-Host "  [17/18] kbinput（キーボード入力） をインストール中..."
 
 # tkxlibのインストール
 Write-Host "  [18/18] tkxlib （教材ツール）をインストール中..."
-& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/tkxlib-1.1.1-py3-none-any.whl
+& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/tkxlib-1.1.2-py3-none-any.whl
 
 Write-Host "  Pythonライブラリのインストール完了" -ForegroundColor Green
 Write-Host ""

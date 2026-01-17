@@ -81,9 +81,15 @@
   "extensions.gallery.autoSearchUpdates": false,
   "workbench.enableExperiments": false,
 
+  // 複数ファイルを開く
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+
   // 学習環境を安定化
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmDelete": false,
   "window.title": "${activeEditorShort}${separator}${rootName}",
-  "breadcrumbs.enabled": true
+  "breadcrumbs.enabled": true,
+  "workbench.hover.delay": 10000
+  
 }
