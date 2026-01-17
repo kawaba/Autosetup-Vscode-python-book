@@ -17,6 +17,12 @@
 
 ## コード生成のルール
 
+### docstringの形式
+- 原則として、処理手順を番号付きのリストで記述する。
+- ひとつの手順を、リスト項目とその下に続く箇条書き項目で記述する場合がある。
+- 箇条書き項目がある場合、リスト項目は「見出し」として扱い、箇条書き項目をコード生成の指示として解釈する。
+- 箇条書き項目は上から下へ順番に実行すると解釈する。
+
 ### docstringにより生成するコードの分類
 - 関数のdoctringでは関数を生成する
 - クラスのdocstringではクラスを生成する
@@ -30,18 +36,29 @@
 
 #### 必須項目
 - ✅ 関数やクラスにdocstringが書かれていなかった場合は、必ずdocstringを生成して含める
-- ✅ 適切なコメント行を含める（特に複雑な処理）
 - ✅ 指示があれば、型ヒント（Type Hints）を使用する
 - ✅ 指示があれば、エラーハンドリングを実装するが、それ以外は実装しない
 - ✅ 初心者向けの変数名を使用する
 
 #### コードスタイル
-- PEP 8に準拠する（参照：https://www.python.org/dev/peps/pep-0008/）
+- PEP 8に準拠する
 - 関数の長さは30行以内を目安とする
 - 1行の長さは79文字以内を目指す
 - わかりやすさを優先する
 - 論理演算子を含む式では、必ず、比較式を()で囲む
+- 範囲の比較では、**比較の連鎖を使って**簡単化する（例：`if 0 < x < 10:`）
+- **1行で指示された条件付きの代入**は、条件式構文を使って**実装する（例：`message = '当たり' if number == 6 else 'はずれ'`）
 
+#### 入力プロンプトの生成ルール
+- input()関数で、指示があれば指示通りの入力プロンプトを生成する
+- input()関数では、指示がなければ**簡潔な日本語で**入力プロンプトを自動生成する（例： '年齢>' '身長>'）
+- 入力プロンプトには、必ず'>'を含める
+- input()関数で文字列以外を入力する場合は、同時に型変換を行う（例：`age = float(input("年齢> "))`）
+
+#### コメントの生成ルール
+- if文、for文、while文などの制御構造には、処理の目的を示すコメントを追加する
+- 1. 2.のような項番の付いた処理には、適切なコメントを追加する。ただし、項番はコメントに含めない
+- コメントは日本語で記述する
 
 ### 2. 入門者向けの実装ガイドライン
 
@@ -109,22 +126,22 @@ def process_number(value: str) -> int:
 ## 参照リソース
 
 ### 公式ドキュメント
-- **Python公式チュートリアル**: https://docs.python.org/ja/3/tutorial/
-- **PEP 8 - Python Enhancement Proposal**: https://www.python.org/dev/peps/pep-0008/
-- **Google Python スタイルガイド**: https://google.github.io/styleguide/pyguide.html
+- **Python公式チュートリアル**
+- **PEP 8 - Python Enhancement Proposal**
+- **Google Python スタイルガイド**
 
 ### 学習リソース
-- **Real Python**: https://realpython.com/ （初心者向け英語記事）
-- **Python公式ドキュメント - 標準ライブラリ**: https://docs.python.org/ja/3/library/
-- **Automate the Boring Stuff with Python**: https://automatetheboringstuff.com/
+- **Real Python**
+- **Python公式ドキュメント - 標準ライブラリ**
+- **Automate the Boring Stuff with Python**
 
 ### 型ヒントについて
-- **PEP 484 - Type Hints**: https://www.python.org/dev/peps/pep-0484/
-- **typing モジュール**: https://docs.python.org/ja/3/library/typing.html
+- **PEP 484 - Type Hints**
+- **typing モジュール**
 
 ### docstring形式
-- **Google形式ガイド**: https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings
-- **NumPy docstring形式**: https://numpydoc.readthedocs.io/en/latest/format.html
+- **Google形式ガイド**
+- **NumPy docstring形式**
 
 ---
 
