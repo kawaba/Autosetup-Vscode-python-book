@@ -172,76 +172,72 @@ Write-Host "  wheel をインストール中..."
 & ".\python\python.exe" -m pip install wheel
 
 # コード整形・静的解析ツール
-Write-Host "  [1/18] コード整形・解析ツールをインストール中..."
+Write-Host "  [1/17] コード整形・解析ツールをインストール中..."
 & ".\python\python.exe" -m pip install black pylint flake8 autopep8 isort mypy
 
 # ユーティリティ系
-Write-Host "  [2/18] ユーティリティをインストール中..."
+Write-Host "  [2/17] ユーティリティをインストール中..."
 & ".\python\python.exe" -m pip install requests python-dotenv tqdm colorama
 
 # 数値・統計・可視化
-Write-Host "  [3/18] 数値計算・可視化ライブラリをインストール中..."
+Write-Host "  [3/17] 数値計算・可視化ライブラリをインストール中..."
 & ".\python\python.exe" -m pip install --only-binary :all: numpy pandas matplotlib scipy seaborn
 
 # Web開発
-Write-Host "  [4/18] Web開発ライブラリをインストール中..."
+Write-Host "  [4/17] Web開発ライブラリをインストール中..."
 & ".\python\python.exe" -m pip install flask requests fastapi uvicorn beautifulsoup4 lxml
 
 # Excel・画像・テスト
-Write-Host "  [5/18] Excel・画像処理・テストライブラリをインストール中..."
+Write-Host "  [5/17] Excel・画像処理・テストライブラリをインストール中..."
 & ".\python\python.exe" -m pip install openpyxl pillow pyyaml pytest faker
 
 # Jupyter Notebook
-Write-Host "  [6/18] Jupyter Notebookをインストール中..."
+Write-Host "  [6/17] Jupyter Notebookをインストール中..."
 & ".\python\python.exe" -m pip install notebook jupyterlab ipykernel ipywidgets
 
 # Jupyter LSP
-Write-Host "  [7/18] Jupyter LSPをインストール中..."
+Write-Host "  [7/17] Jupyter LSPをインストール中..."
 & ".\python\python.exe" -m pip install jupyterlab-lsp python-lsp-server
 
 # グラフ・Excel出力拡張
-Write-Host "  [8/18] グラフ・Excel出力ライブラリをインストール中..."
+Write-Host "  [8/17] グラフ・Excel出力ライブラリをインストール中..."
 & ".\python\python.exe" -m pip install plotly xlsxwriter
 
 # streamlit 関係
-Write-Host "  [9/18] グラフ・streamlit関連ライブラリをインストール中..."
+Write-Host "  [9/17] グラフ・streamlit関連ライブラリをインストール中..."
 & ".\python\python.exe" -m pip install streamlit requests
 
 # その他（settings.jsonで参照されているもの）
-Write-Host "  [10/18] その他必要なライブラリをインストール中..."
+Write-Host "  [10/17] その他必要なライブラリをインストール中..."
 & ".\python\python.exe" -m pip install debugpy
 
 # ゲーム開発
-Write-Host "  [11/18] ゲーム開発ライブラリをインストール中..."
+Write-Host "  [11/17] ゲーム開発ライブラリをインストール中..."
 & ".\python\python.exe" -m pip install pygame arcade pyglet
 
 # 機械学習・データサイエンス
-Write-Host "  [12/18] 機械学習ライブラリをインストール中..."
+Write-Host "  [12/17] 機械学習ライブラリをインストール中..."
 & ".\python\python.exe" -m pip install scikit-learn statsmodels
 
 # データベース・ORM
-Write-Host "  [13/18] データベースライブラリをインストール中..."
+Write-Host "  [13/17] データベースライブラリをインストール中..."
 & ".\python\python.exe" -m pip install sqlalchemy psycopg2-binary
 
 # API開発強化
-Write-Host "  [14/18] API開発強化ライブラリをインストール中..."
+Write-Host "  [14/17] API開発強化ライブラリをインストール中..."
 & ".\python\python.exe" -m pip install pydantic httpx
 
 # 日本語処理
-Write-Host "  [15/18] 日本語処理ライブラリをインストール中..."
+Write-Host "  [15/17] 日本語処理ライブラリをインストール中..."
 & ".\python\python.exe" -m pip install janome
 
 # ターミナル出力
-Write-Host "  [16/18] ターミナル出力ライブラリをインストール中..."
+Write-Host "  [16/17] ターミナル出力ライブラリをインストール中..."
 & ".\python\python.exe" -m pip install rich
 
-# tkinputのインストール
-Write-Host "  [17/18] kbinput（キーボード入力） をインストール中..."
-& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/kbinput-1.0.0-py3-none-any.whl
-
 # tkxlibのインストール
-Write-Host "  [18/18] tkxlib （教材ツール）をインストール中..."
-& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/tkxlib-1.1.1-py3-none-any.whl
+Write-Host "  [17/17] tkxlib （教材ツール）をインストール中..."
+& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/tkxlib-1.1.5-py3-none-any.whl
 
 Write-Host "  Pythonライブラリのインストール完了" -ForegroundColor Green
 Write-Host ""
