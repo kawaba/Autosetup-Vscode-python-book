@@ -46,6 +46,7 @@
   "python.languageServer": "Pylance",
   "python.analysis.autoImportCompletions": true,
   "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.extraPaths": ["${workspaceFolder}"],
 
   "python.terminal.executeInFileDir": true,
   "python.createEnvironment.trigger": "off",
