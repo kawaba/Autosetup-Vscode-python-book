@@ -237,7 +237,7 @@ Write-Host "  [16/17] ターミナル出力ライブラリをインストール中..."
 
 # tkxlibのインストール
 Write-Host "  [17/17] tkxlib （教材ツール）をインストール中..."
-& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/tkxlib-1.1.5-py3-none-any.whl
+& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/tkxlib-2.0.1-py3-none-any.whl
 
 Write-Host "  Pythonライブラリのインストール完了" -ForegroundColor Green
 Write-Host ""
