@@ -6,7 +6,7 @@ topics: ["python", "VScode", "portable", "CoPilot", "Script"]
 published: true
 ---
 ## インストールなしで使えるPython環境
-　Pythonを学ぶためには、**Pythonインタープリタ**はもちろんですが、IDEも必要です。最近は、（IDEではありませんが）**VScode**がよく使われています。また、学習の初期段階で、小さなコードを試すには、**Jupyter Notebook**がとても便利です。
+　Pythonを学ぶためには、**Pythonインタープリタ**はもちろんですが、IDEも必要です。最近は、（IDEではありませんが）**VS Code**がよく使われています。また、学習の初期段階で、小さなコードを試すには、**Jupyter Notebook**がとても便利です。
  
 　そして、AIも使えないと困りますね。定番は**GitHub Copilot**です。学生さんなら、（申請さえすれば）無料でProバージョンが使えます。AIもGPT-codexやGemini、Claudeなどの最新版を使えるようになります。
 
