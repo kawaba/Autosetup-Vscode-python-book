@@ -16,3 +16,5 @@ ms-toolsai.jupyter-renderers
 ms-toolsai.vscode-jupyter-cell-tags
 ms-toolsai.vscode-jupyter-slideshow
 ms-vscode.remote-repositories
+yzhang.markdown-all-in-one
+octop162.markdown-table-editor

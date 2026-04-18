@@ -96,6 +96,13 @@ published: true
 | Jupyter Cell Tags | セルタグ管理 |
 | Jupyter Slide Show | スライドショー機能 |
 
+#### Markdown
+
+| 拡張機能名 | 説明 |
+|---|---|
+| Markdown All in One | Markdown編集支援（プレビュー・ショートカット等） |
+| Markdown Table Editor | Markdownテーブルの視覚的編集 |
+
 #### その他
 
 | 拡張機能名 | 説明 |
@@ -319,6 +326,8 @@ ms-toolsai.jupyter-renderers
 ms-toolsai.vscode-jupyter-cell-tags
 ms-toolsai.vscode-jupyter-slideshow
 ms-vscode.remote-repositories
+yzhang.markdown-all-in-one
+octop162.markdown-table-editor
 ``` 
 
 この内容を変更すればセットアップする拡張機能を変更できます。

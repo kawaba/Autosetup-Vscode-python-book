@@ -202,6 +202,16 @@ def process_number(value: str) -> int:
   - 入力の場合:`except (OSError, UnicodeDecodeError) as e:` を使うこと
   - 出力の場合:`except (OSError, UnicodeEncodeError) as e:` を使うこと
 - CSVの読み書きにはpandasを使わず、標準ライブラリのcsvモジュールを使うこと
+- ファイル拡張子が `.csv` の場合は、常に標準ライブラリの`csv`モジュールを使用すること（必須）
+- `.csv` ファイルの解析に、`split()` などの文字列分割を使ってはならない
+- `.csv` 読み込み時は、`open(..., newline="", encoding="utf-8")` を使用すること
+- `.csv` 書き込み時も、`open(..., newline="", encoding="utf-8")` を使用すること
+- `.csv` の読み書きは、ヘッダーの有無にかかわらず原則として`csv.reader`と`csv.writer`を使用すること
+- `csv.DictReader`と`csv.DictWriter`は、要件で明示的に使用指示がある場合のみ使用すること
+- `csv.DictWriter`を使う場合は`fieldnames`を明示し、新規作成時は`writeheader()`でヘッダー行を書き込むこと
+- `csv`モジュールを使うtry文では、`csv.Error`も補足すること
+    - 読み込み時: `except (OSError, UnicodeDecodeError, csv.Error) as e:`
+    - 書き込み時: `except (OSError, UnicodeEncodeError, csv.Error) as e:`
 
 **読み込み例**
 ```python
@@ -220,6 +230,14 @@ try:
 except (OSError, UnicodeEncodeError) as e:
     print(f"ファイルの書き込みに失敗しました: {e}")
 ```
+
+### 6.10 拡張子とcsvモジュール使用判定
+
+- 拡張子が `.csv` の場合: `csv`モジュールを必ず使う。
+- 拡張子が `.csv` の場合: 原則として `reader`/`writer` を使用する。
+- 拡張子が `.csv` の場合でも、`DictReader`/`DictWriter` は明示指示があるときのみ使用する。
+- 拡張子が `.txt` など `.csv` 以外の場合: 要件に「csvモジュールを使う」という明示指示があるときのみ、`csv`モジュールを使う。
+- 拡張子が `.txt` など `.csv` 以外で、csv使用の明示指示がない場合: `csv`モジュールは使わず、通常のテキスト処理で実装する。
 
 ---
 ## 7. 要件定義から作成する仕様書の生成ルール
@@ -310,6 +328,10 @@ except (OSError, UnicodeEncodeError) as e:
 - [ ] 変数名は意味が明確か？
 - [ ] PEP 8に準拠しているか？
 - [ ] 実行可能で動作確認ができるか？
+- [ ] 対象ファイルの拡張子は `.csv` か？
+- [ ] `.csv` なら `csv` モジュールを必須適用しているか？
+- [ ] `csv` モジュールを使うtry文で `csv.Error` を補足しているか？
+- [ ] `.csv` 以外なら、`csv` 使用の明示指示がある場合のみ使用しているか？
 
 ---
 
@@ -338,6 +360,7 @@ except (OSError, UnicodeEncodeError) as e:
 | 2026-04-02 | 6.9 テキストファイルの入出力を追加 |
 | 2026-04-05 | 関数化判断の明確化（3.1追記、7.2〜7.4追加） |
 | 2026-04-05 | 整合性向上の文面修正（6.1, 6.4, 6.6, 7.3, 10.1, 10.2） |
+| 2026-04-10 | CSV利用ルールを強化（6.9追記、6.10新設、9章チェック追加） |
 
 ---
 
