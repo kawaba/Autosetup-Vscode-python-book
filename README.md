@@ -66,7 +66,7 @@ published: true
  　VScodeの拡張機能はミニマムなセットです。開発する分野に応じて、VScodeのメニューから必要な拡張機能を追加してください。
  　
 ### PythonとVScode
-- Python 3.13.0 (Embeddable版)
+- Python 3.13.13 (Embeddable版)
 - Visual Studio Code (Portable版)
 　
 ### インストールされるVS Code拡張機能一覧
@@ -79,6 +79,7 @@ published: true
 | Pylance | Python言語サーバー（高速・高機能） |
 | Python Debugger | Pythonデバッガー |
 | Python Environments Manager | Python環境管理ツール |
+| Black Formatter | Blackによるコード自動整形 |
 
 #### AI支援
 
@@ -119,6 +120,7 @@ published: true
 |---|---|
 | pip | 最新版 |
 | wheel | パッケージビルドツール |
+| build | パッケージビルドフロントエンド |
 
 #### 2. コード品質・開発支援
 
@@ -246,7 +248,6 @@ published: true
 
 | ライブラリ名 | 説明 |
 |---|---|
-| kbinput | キーボード入力ライブラリ(カスタム) |
 | tkxlib | 学習用のツール(カスタム) |
 
 ## 使い方
@@ -320,6 +321,7 @@ ms-python.debugpy
 ms-python.python
 ms-python.vscode-pylance
 ms-python.vscode-python-envs
+ms-python.black-formatter
 ms-toolsai.jupyter
 ms-toolsai.jupyter-keymap
 ms-toolsai.jupyter-renderers
