@@ -3,22 +3,24 @@
   "python.defaultInterpreterPath": "${env:PORTABLE_PYTHON_PATH}",
 
   // 外観
-  "workbench.colorTheme": "Default Light+",
+  "workbench.colorTheme": "Light+",
   "workbench.startupEditor": "none",
   "workbench.editor.empty.hint": "hidden",
   "workbench.secondarySideBar.defaultVisibility": "visible",
+  "editor.fontFamily": "PlemolJP HS",
+  "editor.fontSize": 14,
 
   // エディタ
   "files.autoSave": "afterDelay",
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.defaultFormatter": "ms-python.black-formatter",
   "editor.tabSize": 4,
   "editor.insertSpaces": true,
-  "editor.renderWhitespace": "boundary",
+  "editor.renderWhitespace": "all",
 
   // 隠しファイル
   "files.exclude": {
-    "**/.vscode": true
+    "**/.vscode": false
   },
 
   // ターミナル
@@ -40,7 +42,6 @@
 
   // Python関連
   "python-envs.defaultEnvManager": "ms-python.python:system",
-  "python-envs.pythonProjects": [],
   "python.useEnvironmentsExtension": true,
 
   "python.languageServer": "Pylance",
@@ -50,7 +51,7 @@
 
   "python.terminal.executeInFileDir": true,
   "python.createEnvironment.trigger": "off",
-  "python.testing.pytestEnabled": false,
+  "python.testing.pytestEnabled": true,
 
   // GitHub Copilot
   "github.copilot.enable": {
