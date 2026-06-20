@@ -64,24 +64,11 @@
   // Copilot Chat タブを自動表示しない
   "github.copilot.chat.autoShow": false,
 
-  // 初回ガイドやWalkthroughの自動表示も抑止
-  "workbench.welcomePage.walkthroughs.openOnInstall": false,
-  "workbench.welcomePage.walkthroughs.openOnStartup": false,
-  "workbench.welcomePage.experimental.startPageEnabled": false,
-
-  // 更新と通信
-  "update.mode": "none",
-  "update.showReleaseNotes": false,
-  "extensions.autoUpdate": false,
-  "extensions.autoCheckUpdates": false,
-  "extensions.ignoreRecommendations": true,
-  "telemetry.telemetryLevel": "off",
-  "security.workspace.trust.untrustedFiles": "open",
-
-  // オンライン/オフライン両対応
-  "http.proxySupport": "off",
-  "extensions.gallery.autoSearchUpdates": false,
-  "workbench.enableExperiments": false,
+  // 注意: 更新・拡張機能の自動更新・テレメトリ・ワークスペース信頼などの
+  //       「ユーザー設定専用(application スコープ)」の設定は、ここ(ワークスペース設定)
+  //       に書くと「ワークスペースに書き込めません」警告が出るため、ここには置かない。
+  //       これらは config\settings.json 経由でユーザー設定
+  //       (vscode\data\user-data\User\settings.json) 側に集約している。
 
   // 複数ファイルを開く
   "workbench.editor.enablePreview": false,
