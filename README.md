@@ -26,21 +26,24 @@ published: true
 ```
 ./portable-python-vscode
   ├─config
-  │   ├─cleanExtensions.txt     VScode拡張機能のリスト
-  │   └─settings.json			ダミー用
+  │    ├─xtensions.txt 　　VScode拡張機能のリスト
+  │    └─settings.json	　ダミー用
   ├─workspace
-  │   ├─.vscode
-  │   │     ├─locale.json		日本語モードの指定
-  │   │     └─settings.json		VScodeの設定
-  │   └─sample
-  │          ├─sample.ipynb		サンプルのJupyter Notebookファイル
-  │          └─sample.py		サンプルのPythonソースコード
-  ├─launch-vscode.bat			VScode起動用バッチファイル
-  ├─README.md						
-  ├─setup.bat					セットアップ実行用バッチファイル
-  └─setup.ps1					セットアップスクリプト（本体）
+  │    ├─.github 　Copolot がコードを生成する時に参照するガイドライン（内容は随時変更する）
+  │    ├─.vscode
+  │    │      ├─locale.json	　　　日本語モードの指定
+  │    │      ├─settings.json		V　Scode の設定
+  │    │      ├─extensions.json 　推奨する拡張機能（ただし、未使用）
+  │    │      └─launch.json 　　　デバック実行の設定
+  │    ├─img 　教材用画像（未使用）
+  │    └─sample
+  │          ├─sample.ipynb　サンプルのJupyter Notebookファイル
+  │          └─sample.py	　　サンプルのPythonソースコード
+  ├─launch-vscode.bat	　VScode起動用バッチファイル
+  ├─setup.bat	　　セットアップ実行用バッチファイル
+  └─setup.ps1	　　セットアップスクリプト（本体）
 ``` 
-　どこか適切な場所（**ローカルドライブ推奨**）に置いて、**setup.bat**をダブルクリックして実行します。ネットワークの速度にもよりますが、5～10分程度で完了します。
+　どこか適切な場所（**ローカルドライブ推奨**）に置いて、**setup.bat**をダブルクリックして実行します。ネットワークの速度にもよりますが、10～15分程度で完了します。
  完了後のファイル構成は次のようになります。
 
 ``` 
@@ -48,14 +51,17 @@ published: true
   ├─python
   ├─vscode
   ├─workspace
-  │   ├─.vscode
-  │   │     ├─locale.json		日本語モードの指定
-  │   │     └─settings.json		VScodeの設定
-  │   └─sample
-  │          ├─sample.ipynb		サンプルのJupyter Notebookファイル
-  │          └─sample.py		サンプルのPythonソースコード
-  ├─launch-vscode.bat			VScode起動用バッチファイル
-  └─README.md						
+  │    ├─.github 　Copolot がコードを生成する時に参照するガイドライン（内容は随時変更する）
+  │    ├─.vscode
+  │    │      ├─locale.json	　　　日本語モードの指定
+  │    │      ├─settings.json		V　Scode の設定
+  │    │      ├─extensions.json 　推奨する拡張機能（ただし、未使用）
+  │    │      └─launch.json 　　　デバック実行の設定
+  │    ├─img 　教材用画像（未使用）
+  │    └─sample
+  │          ├─sample.ipynb　サンプルのJupyter Notebookファイル
+  │          └─sample.py	　　サンプルのPythonソースコード
+  └─ launch-vscode.bat			VScode起動用バッチファイル
 ```   
 
 必ず**launch-vscode.bat**を使って起動してください。
