@@ -13,15 +13,11 @@ Write-Host ""
 # ============================================================
 # 0. 実行パスの長さチェック（Windowsロングパス対策）
 # ============================================================
-# このスクリプトはＣドライブの直下などで実行してください。
-# downloadフォルダなどで実行するとパスが長くなり、Windowsの
-# 制限を超えてしまう可能性があります。# その場合、正常に
-# インストールできないので注意してください。
 
 $currentPath = $PSScriptRoot
 $pathLengthWarningThreshold = 60
 
-Write-Host "[0/5] 実行パスを確認中..." -ForegroundColor Green
+Write-Host "[0/5] 実行パスを確認中..." -ForegroundColor Yellow
 Write-Host "  現在の実行フォルダ: $currentPath"
 Write-Host "  パスの文字数: $($currentPath.Length) 文字"
 
@@ -29,16 +25,17 @@ if ($currentPath.Length -gt $pathLengthWarningThreshold) {
     Write-Host ""
     Write-Host "  ★★★ 警告 ★★★" -ForegroundColor Red
     Write-Host "  実行フォルダのパスが長すぎる可能性があります。" -ForegroundColor Red
+    Write-Host "  このスクリプトはＣドライブの直下などで実行してください。" -ForegroundColor Red
     Write-Host "  このまま進めると、インストール中にファイルパスが" -ForegroundColor Red
-    Write-Host "  Windowsの制限（260文字）を超えて失敗することがあります。" -ForegroundColor Red
+    Write-Host "  Windowsの制限（260文字）を超えて失敗する可能性があります。" -ForegroundColor Red
     Write-Host ""
-    Write-Host "  このまま中止しますか？ (Y/N)" -ForegroundColor White
+    Write-Host "  実行フォルダを移動してやり直しますか？ (Y/N)" -ForegroundColor White
     $continueAnswer = Read-Host
 
     if ($continueAnswer -eq "Y" -or $continueAnswer -eq "y") {
         Write-Host ""
         Write-Host "  セットアップを中止しました。" -ForegroundColor Yellow
-        Write-Host "  フォルダを移動してから再実行してください。" -ForegroundColor Yellow
+        Write-Host "  フォルダを適切な場所へ移動してから再実行してください。" -ForegroundColor Yellow
         Write-Host ""
         Write-Host "Press any key to exit..."
         $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
