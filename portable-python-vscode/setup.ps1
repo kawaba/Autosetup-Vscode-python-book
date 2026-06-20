@@ -41,8 +41,13 @@ if ($currentPath.Length -gt $pathLengthWarningThreshold) {
         Write-Host "  セットアップを中止しました。" -ForegroundColor Yellow
         Write-Host "  フォルダを短いパスへ移動してから再実行してください。" -ForegroundColor Yellow
         Write-Host ""
-        Write-Host "Press any key to exit..."
-        $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+        Write-Host "終了するには何かキーを押してください..." -ForegroundColor White
+        try {
+            $Host.UI.RawUI.FlushInputBuffer()
+            $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+        } catch {
+            $null = Read-Host "終了するには Enter キーを押してください"
+        }
         exit 1
     }
 
@@ -163,7 +168,7 @@ Write-Host "  get-pip.py をダウンロード中..."
 Invoke-WebRequest -Uri $getPipUrl -OutFile $getPipFile
 
 Write-Host "  pip をインストール中..."
-& ".\python\python.exe" $getPipFile
+& ".\python\python.exe" $getPipFile --no-warn-script-location
 
 Write-Host "  pipのバージョン確認:"
 & ".\python\python.exe" -m pip --version
@@ -451,8 +456,15 @@ foreach ($item in $itemsToDelete) {
 Write-Host ""
 Write-Host "セットアップファイルの削除が完了しました。" -ForegroundColor Green
 Write-Host ""
-Write-Host "Press any key to exit..."
-$null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+Write-Host "終了するには何かキーを押してください..." -ForegroundColor White
+try {
+    # 入力バッファに残っているキー（起動時のEnterなど）を破棄してから待機
+    $Host.UI.RawUI.FlushInputBuffer()
+    $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+} catch {
+    # ReadKey が使えない環境では Enter 待ちにフォールバック
+    $null = Read-Host "終了するには Enter キーを押してください"
+}
 
 exit 0
 
