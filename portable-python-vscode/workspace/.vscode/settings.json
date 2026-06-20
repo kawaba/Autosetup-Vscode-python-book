@@ -20,7 +20,7 @@
 
   // 隠しファイル
   "files.exclude": {
-    "**/.vscode": false
+    "**/.vscode": true
   },
 
   // ターミナル
