@@ -10,7 +10,49 @@ Write-Host " Portable Python + VS Code 環境セットアップ開始" -ForegroundColor Cy
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host ""
 
-# ※ 実行パスの長さチェックは setup.bat 側で実施しています。
+# ============================================================
+# 0. 実行パスの長さチェック（Windowsロングパス対策）
+# ============================================================
+
+$currentPath = $PSScriptRoot
+$pathLengthWarningThreshold = 60
+
+Write-Host "[0/5] 実行パスを確認中..." -ForegroundColor Yellow
+Write-Host "  現在の実行フォルダ: $currentPath"
+Write-Host "  パスの文字数: $($currentPath.Length) 文字"
+
+if ($currentPath.Length -gt $pathLengthWarningThreshold) {
+    Write-Host ""
+    Write-Host "  ★★★ 警告 ★★★" -ForegroundColor Red
+    Write-Host "  実行フォルダのパスが長すぎる可能性があります。" -ForegroundColor Red
+    Write-Host "  Cドライブの直下など、短いパスで実行してください。" -ForegroundColor Red
+    Write-Host "  このまま進めると、インストール中にファイルパスが" -ForegroundColor Red
+    Write-Host "  Windowsの制限（260文字）を超えて失敗する可能性があります。" -ForegroundColor Red
+    Write-Host ""
+    Write-Host "  よくある原因:" -ForegroundColor Yellow
+    Write-Host "    ・Downloads フォルダ内で実行している" -ForegroundColor Yellow
+    Write-Host "    ・GitHubの「Download ZIP」でフォルダ名が二重になっている" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Host "  実行フォルダを移動するため中止しますか？ (Y/N)" -ForegroundColor White
+    $continueAnswer = Read-Host
+
+    if ($continueAnswer -eq "Y" -or $continueAnswer -eq "y") {
+        Write-Host ""
+        Write-Host "  セットアップを中止しました。" -ForegroundColor Yellow
+        Write-Host "  フォルダを短いパスへ移動してから再実行してください。" -ForegroundColor Yellow
+        Write-Host ""
+        Write-Host "Press any key to exit..."
+        $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+        exit 1
+    }
+
+    Write-Host ""
+    Write-Host "  続行します。失敗する場合はフォルダを短いパスへ移動してください。" -ForegroundColor Yellow
+} else {
+    Write-Host "  パスの長さは問題ありません。" -ForegroundColor Green
+}
+
+Write-Host ""
 
 # ============================================================
 # 1. ポータブルPythonのダウンロード・展開
