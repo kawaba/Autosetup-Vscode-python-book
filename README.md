@@ -29,7 +29,7 @@ published: true
   │    ├─xtensions.txt 　　VScode拡張機能のリスト
   │    └─settings.json	　ダミー用
   ├─workspace
-  │    ├─.github 　Copolot がコードを生成する時に参照するガイドライン（内容は随時変更する）
+  │    ├─.github 　Copolot がコードを生成する時に参照するガイドラインのファイルがある
   │    ├─.vscode
   │    │      ├─locale.json	　　　日本語モードの指定
   │    │      ├─settings.json		V　Scode の設定
@@ -50,7 +50,7 @@ published: true
   ├─python
   ├─vscode
   ├─workspace
-  │    ├─.github 　Copolot がコードを生成する時に参照するガイドライン（内容は随時変更する）
+  │    ├─.github 　Copolot がコードを生成する時に参照するガイドラインのファイルがある
   │    └─sample
   │          ├─sample.ipynb　サンプルのJupyter Notebookファイル
   │          └─sample.py	　　サンプルのPythonソースコード
