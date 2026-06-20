@@ -39,7 +39,7 @@ if ($currentPath.Length -gt $pathLengthWarningThreshold) {
         Write-Host ""
         Write-Host "Press any key to exit..."
         $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-        exit
+        exit 1
     }
 
     Write-Host ""
@@ -450,4 +450,6 @@ Write-Host "セットアップファイルの削除が完了しました。" -ForegroundColor Green
 Write-Host ""
 Write-Host "Press any key to exit..."
 $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+
+exit 0
 
