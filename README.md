@@ -35,7 +35,6 @@ published: true
   │    │      ├─settings.json		V　Scode の設定
   │    │      ├─extensions.json 　推奨する拡張機能（ただし、未使用）
   │    │      └─launch.json 　　　デバック実行の設定
-  │    ├─img 　教材用画像（未使用）
   │    └─sample
   │          ├─sample.ipynb　サンプルのJupyter Notebookファイル
   │          └─sample.py	　　サンプルのPythonソースコード
@@ -52,17 +51,12 @@ published: true
   ├─vscode
   ├─workspace
   │    ├─.github 　Copolot がコードを生成する時に参照するガイドライン（内容は随時変更する）
-  │    ├─.vscode
-  │    │      ├─locale.json	　　　日本語モードの指定
-  │    │      ├─settings.json		V　Scode の設定
-  │    │      ├─extensions.json 　推奨する拡張機能（ただし、未使用）
-  │    │      └─launch.json 　　　デバック実行の設定
-  │    ├─img 　教材用画像（未使用）
   │    └─sample
   │          ├─sample.ipynb　サンプルのJupyter Notebookファイル
   │          └─sample.py	　　サンプルのPythonソースコード
   └─ launch-vscode.bat			VScode起動用バッチファイル
 ```   
+（注）.vscodeフォルダはworkspace内に残っていますが、VS Code上では表示されないので、上図では表記を省略しています。
 
 必ず**launch-vscode.bat**を使って起動してください。
 起動時に、.vscode/settings.json等を読み取って反映します。
