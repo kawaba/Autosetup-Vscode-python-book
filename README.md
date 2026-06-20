@@ -12,14 +12,14 @@ published: true
 
 　そこで、これらをまとめてセットアップするスクリプトを作成しました。完全にポータブルな環境が5～10分程度で生成されます。ポータブルですから、インストールなしで、スクリプトの実行が終わったらそのまま実行できます。**仮想環境も必要ありません**。スクリプトで必要なだけ環境を作れるからです。いくつ環境を作っても、互いに影響しません。
 
-## セットアップ作業
-セットアップは、setup.batをダブルクリックで実行するだけです。それだけで完了します。
-
-### GitHubからダウンロードしてスクリプトを起動する
+## セットアップの手順
+### 1. GitHubからダウンロードしてスクリプトを起動する
 スクリプト等はGitHubにあります。次からダウンロードまたはgitで入手してください
 
 - [GitHubを開く](https://github.com/kawaba/Autosetup-Vscode-python)
 - [zip形式でダウンロードする](https://github.com/kawaba/Autosetup-Vscode-python/archive/refs/heads/main.zip)
+
+　どこか適切な場所（**ローカルドライブ推奨**）に置いて、**setup.bat**をダブルクリックして実行します。ネットワークの速度にもよりますが、10～15分程度で完了します。具体的には次のようにします。
 
 1) 任意のフォルダにダウンロードします。
 2) ダウンロードしたファイルを展開します。
@@ -27,10 +27,8 @@ published: true
    Python環境を置きたいドライブの直下にコピーします。
 4) コピー先のportable-python-vscodeを開いて、setup.batファイルを<br>
    ダブルクリックします。<br>インストールがはじまり10～15分後に自動的に完了します。
-   
 
-### ファイル構成
-　スクリプトは次のような構成です。
+　実行するスクリプトのファイル構成は次のようです。
 
 ```
 ./portable-python-vscode
@@ -51,8 +49,11 @@ published: true
   ├─setup.bat	　　セットアップ実行用バッチファイル
   └─setup.ps1	　　セットアップスクリプト（本体）
 ``` 
-　どこか適切な場所（**ローカルドライブ推奨**）に置いて、**setup.bat**をダブルクリックして実行します。ネットワークの速度にもよりますが、10～15分程度で完了します。
- 完了後のファイル構成は次のようになります。
+
+### 2. セットアップ後のディレクトリとファイルの校正 
+完了後のディレクトリとファイル構成は次のようになります。
+セットアップ用のファイルは削除されてなくなります。
+起動用のバッチファイルhは**launch-vscode.bat**です。
 
 ``` 
 ./portable-python-vscode
@@ -67,8 +68,155 @@ published: true
 ```   
 （注）.vscodeフォルダはworkspace内に残っていますが、VS Code上では表示されないので、上図では表記を省略しています。
 
+
+### 3. 起動用アイコンの作成
+launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って反映します。
 必ず**launch-vscode.bat**を使って起動してください。
-起動時に、.vscode/settings.json等を読み取って反映します。
+
+バッチファイルから起動するのが面倒な場合は、次の手順で起動用アイコンを作るといいでしょう。
+
+1. エクスプローラーで、launch-vscode.batを右ボタンでクリックします。
+2. ［その他のオブションを確認］⇒［ショートカットの作成］を選びます。
+3. 作成されたショートカットを右ボタンでクリックし［プロパティ］をクリックします。
+4. プロパティダイアログが開くので、下の方にある［アイコンの変更］ボタンを押します。
+5. アイコンの変更ダイアログが開くので［参照］ボタンを押します。
+6. vscodeフォルダの中にある［Code.exe］をクリックして［開く］ボタンを押します。
+7. ［OK］ボタンを押してプロパティダイアログに戻ります
+8. ［OK］ボタンを押します
+9. エクスプロラーに戻ります。
+10. ショートカットアイコンがVS Codeアイコンに変わっています。
+11. ショートカットアイコンをデスクトップにドラッグして離します。
+
+## 使い方
+(1) **launch-vscode.bat**か起動用アイコンをダブルクリックして起動します。<br>ここで、拡張機能がロードされるタイミングが遅れて、英語モードの表示になる場合があります。
+
+ ![10.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/63868bfb-79c2-4f6f-9ef6-20364e91e354.png)
+
+(2) 英語モードで表示された場合は、一度終了し、もう一度起動し直すと日本語モードで起動します。
+ 
+![00.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/9b85f111-0dab-48a3-8c78-408b8c89b5e4.png)
+
+
+
+
+
+③ まず、VScodeにPythonインタープリタを認識させる必要があります。
+ - sampleフォルダの中の**sample.py**を開きます
+ - すると、右下にPythonを選択するウィンドウが開くので、［Python インタープリタの選択］のボタンをクリックします
+ 　
+![12.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/490b5aec-37dd-4a07-b051-67f80224ae6e.png)
+ 
+④選択ウィンドウが開くので、［python.defaultInterpreterPath 設定でPythonを使用する･･･］ をクリックします
+　
+![13.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/307f828f-46fe-450e-a085-eac6a482f95c.png)
+
+　 
+④もう一度、Pythonのパスを設定するウィンドウが開きますが、×をクリックして閉じます
+
+![14.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/7eda055f-203d-464a-8f2a-75a4c9bc9210.png)
+　
+　
+以上でPythonを認識したので、これ以降は自由にコードを書いて実行できます。
+なお、sample.ipynbファイルは、Jupyter Notebookのファイルです。開いて確認してください。
+
+![image6.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/a803d695-213b-4d49-b29b-7f33e59d5ba0.png)
+
+ 　
+⑤Copilot　
+　Copilot（AIエージェント)を使うには、事前にGithubのアカウントを取得しておく必要があります。また、ログイン認証は2段階認証にしておかなくてはいけません。
+　その上で、初回だけ、GitHubにログインしてアカウントを接続する作業が必要です。上の画面は、まだ接続していな状態です。右下隅の［Signed out］と書かれているCopilotアイコンをクリックし、画面の指示に従って接続してください。
+
+## いろいろなカスタマイズ
+### 画面のテーマの変更
+　画面のテーマ色は**Light＋**です。デフォルトの**Dark＋**にするには次のようにします。
+1. VS Code の 左の下端にある歯車（⚙）アイコンをクリック
+2. 「テーマの選択（Color Theme）」 をクリック
+3. テーマ一覧が表示される
+4. 「Default Dark+」 を選ぶ
+
+### スクリプトのカスタマイズ
+　スクリプトのカスタマイズは比較的簡単です。違うバージョンのPythonをインストールしたりできます。VScodeの拡張機能やpythonのライブラリも追加や削除できます。
+ 自分で変更する時は、claude codeなどのAIに指示・相談して変更させるといいでしょう。手動での変更は間違いの元です。
+
+#### 異なるバージョンのPythonに変更する
+　例えば、3.14.0に変える時は、setup.ps1ファイルのバージョン番号に関係する部分を変更します。青い背景部分を3.14.0、または314に変更するといいでしょう。https://www.python.org/ftp/python をウェブでのぞいてみると、いろいろなバージョンの詳細がわかります。
+ 
+　ただ、Pythonのバージョンが新しすぎると、VScodeやその拡張機能が対応していないこともあるので、新しければいいというものではありません。慎重に決定してください。
+ 　
+
+![16.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/621192a8-a0e0-454d-b8b0-9fbb42907994.png)
+
+
+ #### VScodeの拡張機能
+　VScode本体は毎月バージョンアップされるので、スクリプトでは最新安定版をダウンロードする設定にしています。変更するのは拡張機能です。config/cleanExtensions.txtに、セットアップする拡張機能のリストがあります。内容は次の通りです。
+
+config/cleanExtensions.txt
+```
+esbenp.prettier-vscode
+github.codespaces
+github.copilot
+github.copilot-chat
+github.remotehub
+github.vscode-github-actions
+ms-ceintl.vscode-language-pack-ja
+ms-python.debugpy
+ms-python.python
+ms-python.vscode-pylance
+ms-python.vscode-python-envs
+ms-python.black-formatter
+ms-toolsai.jupyter
+ms-toolsai.jupyter-keymap
+ms-toolsai.jupyter-renderers
+ms-toolsai.vscode-jupyter-cell-tags
+ms-toolsai.vscode-jupyter-slideshow
+ms-vscode.remote-repositories
+yzhang.markdown-all-in-one
+octop162.markdown-table-editor
+``` 
+
+この内容を変更すればセットアップする拡張機能を変更できます。
+拡張機能の名前は、一度手動でセットアップした後、vscodeフォルダのある場所で、次のコマンドを実行するとわかります。
+
+```
+.\vscode\bin\code.cmd --list-extensions
+```
+
+これで名前を調べて、cleanExtention.txtに追加するなどしてください。
+
+## Pythonライブラリの編集
+ 
+ スクリプトの85行目以降に、インストールする項目が並んでいます。
+ 
+ ``` 
+# pipのアップグレード
+Write-Host "  pip をアップグレード中..."
+& ".\python\python.exe" -m pip install --upgrade pip
+
+# wheelのインストール
+Write-Host "  wheel をインストール中..."
+& ".\python\python.exe" -m pip install wheel
+
+# コード整形・静的解析ツール
+Write-Host "  [1/17] コード整形・解析ツールをインストール中..."
+& ".\python\python.exe" -m pip install black pylint flake8 autopep8 isort mypy
+
+# ユーティリティ系
+Write-Host "  [2/17] ユーティリティをインストール中..."
+& ".\python\python.exe" -m pip install requests python-dotenv tqdm colorama
+
+--- 以下省略 ---
+ ``` 
+ 
+ この例にならって、追加したいライブラリを記述してください。
+ 
+ 　インストール後の追加などは、VSCodeで、［表示］メニューから［ターミナル］を開くと、pipコマンドでライブラリの追加や削除ができます。
+  ただし、**python -m pip ～**のように、python経由で実行してください。pipは、環境を生成した時のPythonのパスを記憶しているので、環境を移動している場合は、pip単体で起動すると動作しないからです。
+  
+  次はpip listを実行してみた例です。
+ 
+![15.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/c924eb18-f0ab-46d9-b89b-4ee79fd4864c.png)  
+
+
 
 ## セットアップされる内容
 　VScodeと重要な拡張機能、そして、Pythonインタプリターと主要なライブラリをセットアップします。Pythonライブラリは多くの分野を網羅しています。下記のライブラリのリストを見てください。
@@ -259,130 +407,7 @@ published: true
 |---|---|
 | tkxlib | 学習用のツール(カスタム) |
 
-## 使い方
-① **launch-vscode.bat**をダブルクリックして起動します。ここで、拡張機能がロードされるタイミングが遅れて、英語モードの表示になる場合があります。
 
- ![10.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/63868bfb-79c2-4f6f-9ef6-20364e91e354.png)
-
-② 英語モードで表示された場合は、一度終了し、もう一度起動し直すと日本語モードで起動します。
- 
-![00.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/9b85f111-0dab-48a3-8c78-408b8c89b5e4.png)
-
-③ まず、VScodeにPythonインタープリタを認識させる必要があります。
- - sampleフォルダの中の**sample.py**を開きます
- - すると、右下にPythonを選択するウィンドウが開くので、［Python インタープリタの選択］のボタンをクリックします
- 　
-![12.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/490b5aec-37dd-4a07-b051-67f80224ae6e.png)
- 
-④選択ウィンドウが開くので、［python.defaultInterpreterPath 設定でPythonを使用する･･･］ をクリックします
-　
-![13.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/307f828f-46fe-450e-a085-eac6a482f95c.png)
-
-　 
-④もう一度、Pythonのパスを設定するウィンドウが開きますが、×をクリックして閉じます
-
-![14.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/7eda055f-203d-464a-8f2a-75a4c9bc9210.png)
-　
-　
-以上でPythonを認識したので、これ以降は自由にコードを書いて実行できます。
-なお、sample.ipynbファイルは、Jupyter Notebookのファイルです。開いて確認してください。
-
-![image6.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/a803d695-213b-4d49-b29b-7f33e59d5ba0.png)
-
- 　
-⑤Copilot　
-　Copilot（AIエージェント)を使うには、事前にGithubのアカウントを取得しておく必要があります。また、ログイン認証は2段階認証にしておかなくてはいけません。
-　その上で、初回だけ、GitHubにログインしてアカウントを接続する作業が必要です。上の画面は、まだ接続していな状態です。右下隅の［Signed out］と書かれているCopilotアイコンをクリックし、画面の指示に従って接続してください。
-
-## いろいろなカスタマイズ
-### 画面のテーマの変更
-　画面のテーマ色は**Light＋**です。デフォルトの**Dark＋**にするには次のようにします。
-1. VS Code の 左の下端にある歯車（⚙）アイコンをクリック
-2. 「テーマの選択（Color Theme）」 をクリック
-3. テーマ一覧が表示される
-4. 「Default Dark+」 を選ぶ
-
-### スクリプトのカスタマイズ
-　スクリプトのカスタマイズは比較的簡単です。違うバージョンのPythonをインストールしたりできます。VScodeの拡張機能やpythonのライブラリも追加や削除できます。
- 自分で変更する時は、claude codeなどのAIに指示・相談して変更させるといいでしょう。手動での変更は間違いの元です。
-
-#### 異なるバージョンのPythonに変更する
-　例えば、3.14.0に変える時は、setup.ps1ファイルのバージョン番号に関係する部分を変更します。青い背景部分を3.14.0、または314に変更するといいでしょう。https://www.python.org/ftp/python をウェブでのぞいてみると、いろいろなバージョンの詳細がわかります。
- 
-　ただ、Pythonのバージョンが新しすぎると、VScodeやその拡張機能が対応していないこともあるので、新しければいいというものではありません。慎重に決定してください。
- 　
-
-![16.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/621192a8-a0e0-454d-b8b0-9fbb42907994.png)
-
-
- #### VScodeの拡張機能
-　VScode本体は毎月バージョンアップされるので、スクリプトでは最新安定版をダウンロードする設定にしています。変更するのは拡張機能です。config/cleanExtensions.txtに、セットアップする拡張機能のリストがあります。内容は次の通りです。
-
-config/cleanExtensions.txt
-```
-esbenp.prettier-vscode
-github.codespaces
-github.copilot
-github.copilot-chat
-github.remotehub
-github.vscode-github-actions
-ms-ceintl.vscode-language-pack-ja
-ms-python.debugpy
-ms-python.python
-ms-python.vscode-pylance
-ms-python.vscode-python-envs
-ms-python.black-formatter
-ms-toolsai.jupyter
-ms-toolsai.jupyter-keymap
-ms-toolsai.jupyter-renderers
-ms-toolsai.vscode-jupyter-cell-tags
-ms-toolsai.vscode-jupyter-slideshow
-ms-vscode.remote-repositories
-yzhang.markdown-all-in-one
-octop162.markdown-table-editor
-``` 
-
-この内容を変更すればセットアップする拡張機能を変更できます。
-拡張機能の名前は、一度手動でセットアップした後、vscodeフォルダのある場所で、次のコマンドを実行するとわかります。
-
-```
-.\vscode\bin\code.cmd --list-extensions
-```
-
-これで名前を調べて、cleanExtention.txtに追加するなどしてください。
-
-## Pythonライブラリの編集
- 
- スクリプトの85行目以降に、インストールする項目が並んでいます。
- 
- ``` 
-# pipのアップグレード
-Write-Host "  pip をアップグレード中..."
-& ".\python\python.exe" -m pip install --upgrade pip
-
-# wheelのインストール
-Write-Host "  wheel をインストール中..."
-& ".\python\python.exe" -m pip install wheel
-
-# コード整形・静的解析ツール
-Write-Host "  [1/17] コード整形・解析ツールをインストール中..."
-& ".\python\python.exe" -m pip install black pylint flake8 autopep8 isort mypy
-
-# ユーティリティ系
-Write-Host "  [2/17] ユーティリティをインストール中..."
-& ".\python\python.exe" -m pip install requests python-dotenv tqdm colorama
-
---- 以下省略 ---
- ``` 
- 
- この例にならって、追加したいライブラリを記述してください。
- 
- 　インストール後の追加などは、VSCodeで、［表示］メニューから［ターミナル］を開くと、pipコマンドでライブラリの追加や削除ができます。
-  ただし、**python -m pip ～**のように、python経由で実行してください。pipは、環境を生成した時のPythonのパスを記憶しているので、環境を移動している場合は、pip単体で起動すると動作しないからです。
-  
-  次はpip listを実行してみた例です。
- 
-![15.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/c924eb18-f0ab-46d9-b89b-4ee79fd4864c.png)
 
 ### 追記:
 #### 2026-04-18
