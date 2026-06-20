@@ -16,7 +16,7 @@ Write-Host ""
 # このスクリプトはＣドライブの直下などで実行してください。
 # downloadフォルダなどで実行するとパスが長くなり、Windowsの
 # 制限を超えてしまう可能性があります。# その場合、正常に
-インストールできないので注意してください。
+# インストールできないので注意してください。
 
 $currentPath = $PSScriptRoot
 $pathLengthWarningThreshold = 60
