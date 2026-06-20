@@ -15,11 +15,20 @@ published: true
 ## セットアップ作業
 セットアップは、setup.batをダブルクリックで実行するだけです。それだけで完了します。
 
-### GitHubからダウンロード
+### GitHubからダウンロードしてスクリプトを起動する
 スクリプト等はGitHubにあります。次からダウンロードまたはgitで入手してください
 
 - [GitHubを開く](https://github.com/kawaba/Autosetup-Vscode-python)
 - [zip形式でダウンロードする](https://github.com/kawaba/Autosetup-Vscode-python/archive/refs/heads/main.zip)
+
+1) 任意のフォルダにダウンロードします。
+2) ダウンロードしたファイルを展開します。
+3) 展開したファイルを開き、portable-python-vscodeというフォルダを<br>
+   Python環境を置きたいドライブの直下にコピーします。
+4) コピー先のportable-python-vscodeを開いて、setup.batファイルを<br>
+   ダブルクリックします。<br>インストールがはじまり10～15分後に自動的に完了します。
+   
+
 ### ファイル構成
 　スクリプトは次のような構成です。
 
