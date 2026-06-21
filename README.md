@@ -1,5 +1,5 @@
 ---
-title: "スクリプトだけで完全ポータブルな VSCode＋Python＋Copilot を自動生成する"
+title: "スクリプトで完全ポータブルな VSCode＋Python＋Copilot を自動生成する"
 emoji: "🐍"
 type: "tech"
 topics: ["python", "VScode", "portable", "CoPilot", "Script"]
