@@ -91,7 +91,6 @@ launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って
 ### (1) **launch-vscode.bat**か起動用アイコンをダブルクリックして起動します。
 最初の起動では、GitHub Copilotにサインインする画面が表示されますが、後で行うことにして、右上の×印をクリックして閉じます。
 
-<img src="https://k-webs.jp/python/images/sign-in.png" width="900">
 ![右上の×印をクリック](img/sign-in.png)
 
 <br>ここで、拡張機能がロードされるタイミングが遅れて、英語モードの表示になる場合があります。
