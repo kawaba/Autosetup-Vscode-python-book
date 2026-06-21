@@ -88,19 +88,17 @@ launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って
 11. ショートカットアイコンをデスクトップにドラッグして離します。
 
 ## 使い方
-(1) **launch-vscode.bat**か起動用アイコンをダブルクリックして起動します。<br>ここで、拡張機能がロードされるタイミングが遅れて、英語モードの表示になる場合があります。
+### (1) **launch-vscode.bat**か起動用アイコンをダブルクリックして起動します。
+最初の起動では、GitHub Copilotにサインインする画面が表示されますが、後で行うことにして、右上の×印をクリックして閉じます。
+<img src="https://k-webs.jp/python/images/sign-in.png" width="900"><br>
+<br>
+・ここで、拡張機能がロードされるタイミングが遅れて、英語モードの表示になる場合があります。<br>
+<img src="https://k-webs.jp/python/images/english-mode.png" width="900"><br>
 
- ![10.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/63868bfb-79c2-4f6f-9ef6-20364e91e354.png)
+・英語モードで表示された場合は、一度終了し、もう一度起動し直すと日本語モードで起動します。<br>
+ <img src="https://k-webs.jp/python/images/japanese-mode.png" width="900"><br>
 
-(2) 英語モードで表示された場合は、一度終了し、もう一度起動し直すと日本語モードで起動します。
- 
-![00.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/9b85f111-0dab-48a3-8c78-408b8c89b5e4.png)
-
-
-
-
-
-③ まず、VScodeにPythonインタープリタを認識させる必要があります。
+### (3) VScodeにPythonインタープリタを認識させます。
  - sampleフォルダの中の**sample.py**を開きます
  - すると、右下にPythonを選択するウィンドウが開くので、［Python インタープリタの選択］のボタンをクリックします
  　
