@@ -136,6 +136,7 @@ launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って
 次は、AIエージェントを使えるようにしましょう。
 <br>**GitHub設定ガイド**を見て、GitHubのアカウントを作成し、Copilotを使えるようにしてください。
 
+<img src="https://k-webs.jp/python/images/github-guide.png" width="900">
 
 <br>
 <br>
