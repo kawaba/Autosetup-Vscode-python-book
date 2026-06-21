@@ -37,7 +37,7 @@ flowchart TD
     class G goal;
 ```
 
-![GitHub 初期設定 全体の流れ（6ステップ）](img/01_overall.png)
+![GitHub 初期設定 全体の流れ（6ステップ）](img/001_overall.png)
 
 ---
 
@@ -82,7 +82,7 @@ flowchart LR
 
 ### ✅ ステップ 1〜2 の画面の流れ（まとめ）
 
-![ステップ1〜2 アカウント作成からメール認証までの画面遷移図](img/02_account.png)
+![ステップ1〜2 アカウント作成からメール認証までの画面遷移図](img/002_account.png)
 
 ### つまずいたら
 
@@ -157,7 +157,7 @@ flowchart LR
 
 ### ✅ ステップ 3〜5 の画面の流れ（まとめ）
 
-![ステップ3〜5 Authenticator導入から2FA設定・回復コード保存までの画面遷移図](img/03_twofa.png)
+![ステップ3〜5 Authenticator導入から2FA設定・回復コード保存までの画面遷移図](img/003_twofa.png)
 
 ### 保管のルール（とても重要）
 
@@ -213,7 +213,7 @@ flowchart LR
 
 ### ✅ ステップ 6 の画面の流れ（まとめ）
 
-![ステップ6 VS Codeの［サインイン］ボタンでCopilotを認証する画面遷移図](img/04_copilot.png)
+![ステップ6 VS Codeの［サインイン］ボタンでCopilotを認証する画面遷移図](img/004_copilot.png)
 
 ---
 
