@@ -90,15 +90,18 @@ launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って
 ## 使い方
 ### (1) **launch-vscode.bat**か起動用アイコンをダブルクリックして起動します。
 最初の起動では、GitHub Copilotにサインインする画面が表示されますが、後で行うことにして、右上の×印をクリックして閉じます。
-<img src="https://k-webs.jp/python/images/sign-in.png" width="900"><br>
-<br>
-・ここで、拡張機能がロードされるタイミングが遅れて、英語モードの表示になる場合があります。<br>
-<img src="https://k-webs.jp/python/images/english-mode.png" width="900"><br>
 
-・英語モードで表示された場合は、一度終了し、もう一度起動し直すと日本語モードで起動します。<br>
- <img src="https://k-webs.jp/python/images/japanese-mode.png" width="900"><br>
+<img src="https://k-webs.jp/python/images/sign-in.png" width="900">
 
-### (3) VScodeにPythonインタープリタを認識させます。
+- ここで、拡張機能がロードされるタイミングが遅れて、英語モードの表示になる場合があります。
+
+<img src="https://k-webs.jp/python/images/english-mode.png" width="900">
+
+- 英語モードで表示された場合は、一度終了し、もう一度起動し直すと日本語モードで起動します。
+
+ <img src="https://k-webs.jp/python/images/japanese-mode.png" width="900">
+
+### (2) VScodeにPythonインタープリタを認識させます。
  - sampleフォルダの中の**sample.py**を開きます
  - すると、右下にPythonを選択するウィンドウが開くので、［Python インタープリタの選択］のボタンをクリックします
  　
