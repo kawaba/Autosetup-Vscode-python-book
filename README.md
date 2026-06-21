@@ -93,130 +93,52 @@ launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って
 
 <img src="https://k-webs.jp/python/images/sign-in.png" width="900">
 
-- ここで、拡張機能がロードされるタイミングが遅れて、英語モードの表示になる場合があります。
+<br>ここで、拡張機能がロードされるタイミングが遅れて、英語モードの表示になる場合があります。
 
 <img src="https://k-webs.jp/python/images/english-mode.png" width="900">
 
-- 英語モードで表示された場合は、一度終了し、もう一度起動し直すと日本語モードで起動します。
+<br>英語モードで表示された場合は、一度終了し、もう一度起動し直すと日本語モードで起動します。
 
  <img src="https://k-webs.jp/python/images/japanese-mode.png" width="900">
 
 ### (2) VScodeにPythonインタープリタを認識させます。
- - sampleフォルダの中の**sample.py**を開きます
- - すると、右下にPythonを選択するウィンドウが開くので、［Python インタープリタの選択］のボタンをクリックします
+①sampleフォルダの中の**sample.py**を開きます
+<br>②すると、右下にPythonを選択するウィンドウが開くので、［Python インタープリタの選択］のボタンをクリックします<br>
  　
 <img src="https://k-webs.jp/python/images/select-interpreter.png" width="900">
  
-④選択ウィンドウが開くので、［python.defaultInterpreterPath 設定でPythonを使用する･･･］ をクリックします
-　
-![13.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/307f828f-46fe-450e-a085-eac6a482f95c.png)
+<br>ダイアログが開くので［インタープリターパスを入力］をクリックします。
 
-　 
-④もう一度、Pythonのパスを設定するウィンドウが開きますが、×をクリックして閉じます
+<img src="https://k-webs.jp/python/images/enter-path.png" width="900">
 
-![14.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/7eda055f-203d-464a-8f2a-75a4c9bc9210.png)
-　
-　
-以上でPythonを認識したので、これ以降は自由にコードを書いて実行できます。
-なお、sample.ipynbファイルは、Jupyter Notebookのファイルです。開いて確認してください。
+<br>入力欄の下の［検索］をクリックしてpython.exeを探します。
 
-![image6.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/a803d695-213b-4d49-b29b-7f33e59d5ba0.png)
+<img src="https://k-webs.jp/python/images/find-path.png" width="900">
 
- 　
-⑤Copilot　
-　Copilot（AIエージェント)を使うには、事前にGithubのアカウントを取得しておく必要があります。また、ログイン認証は2段階認証にしておかなくてはいけません。
-　その上で、初回だけ、GitHubにログインしてアカウントを接続する作業が必要です。上の画面は、まだ接続していな状態です。右下隅の［Signed out］と書かれているCopilotアイコンをクリックし、画面の指示に従って接続してください。
+<br>表示されるファイルダイアログで、portable-python-vscode/python/にあるpython.exeを選択して、
+<br>［インタープリターの選択］ボタンを押します。
 
-## いろいろなカスタマイズ
-### 画面のテーマの変更
-　画面のテーマ色は**Light＋**です。デフォルトの**Dark＋**にするには次のようにします。
-1. VS Code の 左の下端にある歯車（⚙）アイコンをクリック
-2. 「テーマの選択（Color Theme）」 をクリック
-3. テーマ一覧が表示される
-4. 「Default Dark+」 を選ぶ
+<img src="https://k-webs.jp/python/images/select-python.png" width="600">
 
-### スクリプトのカスタマイズ
-　スクリプトのカスタマイズは比較的簡単です。違うバージョンのPythonをインストールしたりできます。VScodeの拡張機能やpythonのライブラリも追加や削除できます。
- 自分で変更する時は、claude codeなどのAIに指示・相談して変更させるといいでしょう。手動での変更は間違いの元です。
+<br>VS Codeに戻るので、［Pythonインタープリターの選択］ダイアログを閉じます。
+<br>下端の青いバーに［Python 3.13.13］のようにPythonインタプリターの表示があることを確認してください。
 
-#### 異なるバージョンのPythonに変更する
-　例えば、3.14.0に変える時は、setup.ps1ファイルのバージョン番号に関係する部分を変更します。青い背景部分を3.14.0、または314に変更するといいでしょう。https://www.python.org/ftp/python をウェブでのぞいてみると、いろいろなバージョンの詳細がわかります。
- 
-　ただ、Pythonのバージョンが新しすぎると、VScodeやその拡張機能が対応していないこともあるので、新しければいいというものではありません。慎重に決定してください。
- 　
+<img src="https://k-webs.jp/python/images/close-dialog.png" width="900">
 
-![16.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/621192a8-a0e0-454d-b8b0-9fbb42907994.png)
+<br>以上でPythonが使えるようになったので、これ以降は自由にコードを書いて実行できます。
+<br>なお、sample.ipynbファイルは、Jupyter Notebookのファイルです。開いて確認してください。
+
+<img src="https://k-webs.jp/python/images/jupyter.png" width="900">
 
 
- #### VScodeの拡張機能
-　VScode本体は毎月バージョンアップされるので、スクリプトでは最新安定版をダウンロードする設定にしています。変更するのは拡張機能です。config/cleanExtensions.txtに、セットアップする拡張機能のリストがあります。内容は次の通りです。
+### (3) GitHub Copilotを使えるようにする
 
-config/cleanExtensions.txt
-```
-esbenp.prettier-vscode
-github.codespaces
-github.copilot
-github.copilot-chat
-github.remotehub
-github.vscode-github-actions
-ms-ceintl.vscode-language-pack-ja
-ms-python.debugpy
-ms-python.python
-ms-python.vscode-pylance
-ms-python.vscode-python-envs
-ms-python.black-formatter
-ms-toolsai.jupyter
-ms-toolsai.jupyter-keymap
-ms-toolsai.jupyter-renderers
-ms-toolsai.vscode-jupyter-cell-tags
-ms-toolsai.vscode-jupyter-slideshow
-ms-vscode.remote-repositories
-yzhang.markdown-all-in-one
-octop162.markdown-table-editor
-``` 
+次は、AIエージェントを使えるようにしましょう。
+<br>**GitHub設定ガイド**を見て、GitHubのアカウントを作成し、Copilotを使えるようにしてください。
 
-この内容を変更すればセットアップする拡張機能を変更できます。
-拡張機能の名前は、一度手動でセットアップした後、vscodeフォルダのある場所で、次のコマンドを実行するとわかります。
-
-```
-.\vscode\bin\code.cmd --list-extensions
-```
-
-これで名前を調べて、cleanExtention.txtに追加するなどしてください。
-
-## Pythonライブラリの編集
- 
- スクリプトの85行目以降に、インストールする項目が並んでいます。
- 
- ``` 
-# pipのアップグレード
-Write-Host "  pip をアップグレード中..."
-& ".\python\python.exe" -m pip install --upgrade pip
-
-# wheelのインストール
-Write-Host "  wheel をインストール中..."
-& ".\python\python.exe" -m pip install wheel
-
-# コード整形・静的解析ツール
-Write-Host "  [1/17] コード整形・解析ツールをインストール中..."
-& ".\python\python.exe" -m pip install black pylint flake8 autopep8 isort mypy
-
-# ユーティリティ系
-Write-Host "  [2/17] ユーティリティをインストール中..."
-& ".\python\python.exe" -m pip install requests python-dotenv tqdm colorama
-
---- 以下省略 ---
- ``` 
- 
- この例にならって、追加したいライブラリを記述してください。
- 
- 　インストール後の追加などは、VSCodeで、［表示］メニューから［ターミナル］を開くと、pipコマンドでライブラリの追加や削除ができます。
-  ただし、**python -m pip ～**のように、python経由で実行してください。pipは、環境を生成した時のPythonのパスを記憶しているので、環境を移動している場合は、pip単体で起動すると動作しないからです。
-  
-  次はpip listを実行してみた例です。
- 
-![15.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/c924eb18-f0ab-46d9-b89b-4ee79fd4864c.png)  
-
+<img src="https://k-webs.jp/python/images/github-guide.png" width="900">
+<br>
+<br>
 
 
 ## セットアップされる内容
@@ -408,12 +330,105 @@ Write-Host "  [2/17] ユーティリティをインストール中..."
 |---|---|
 | tkxlib | 学習用のツール(カスタム) |
 
+## いろいろなカスタマイズ
+### 画面のテーマの変更
+　画面のテーマ色は**Light＋**です。デフォルトの**Dark＋**にするには次のようにします。
+1. VS Code の 左の下端にある歯車（⚙）アイコンをクリック
+2. 「テーマの選択（Color Theme）」 をクリック
+3. テーマ一覧が表示される
+4. 「Default Dark+」 を選ぶ
 
+### スクリプトのカスタマイズ
+　スクリプトのカスタマイズは比較的簡単です。違うバージョンのPythonをインストールしたりできます。VScodeの拡張機能やpythonのライブラリも追加や削除できます。
+ 自分で変更する時は、claude codeなどのAIに指示・相談して変更させるといいでしょう。手動での変更は間違いの元です。
+
+#### 異なるバージョンのPythonに変更する
+　例えば、3.14.0に変える時は、setup.ps1ファイルのバージョン番号に関係する部分を変更します。青い背景部分を3.14.0、または314に変更するといいでしょう。https://www.python.org/ftp/python をウェブでのぞいてみると、いろいろなバージョンの詳細がわかります。
+ 
+　ただ、Pythonのバージョンが新しすぎると、VScodeやその拡張機能が対応していないこともあるので、新しければいいというものではありません。慎重に決定してください。
+ 　
+
+![16.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/621192a8-a0e0-454d-b8b0-9fbb42907994.png)
+
+
+ #### VScodeの拡張機能
+　VScode本体は毎月バージョンアップされるので、スクリプトでは最新安定版をダウンロードする設定にしています。変更するのは拡張機能です。config/cleanExtensions.txtに、セットアップする拡張機能のリストがあります。内容は次の通りです。
+
+config/cleanExtensions.txt
+```
+esbenp.prettier-vscode
+github.codespaces
+github.copilot
+github.copilot-chat
+github.remotehub
+github.vscode-github-actions
+ms-ceintl.vscode-language-pack-ja
+ms-python.debugpy
+ms-python.python
+ms-python.vscode-pylance
+ms-python.vscode-python-envs
+ms-python.black-formatter
+ms-toolsai.jupyter
+ms-toolsai.jupyter-keymap
+ms-toolsai.jupyter-renderers
+ms-toolsai.vscode-jupyter-cell-tags
+ms-toolsai.vscode-jupyter-slideshow
+ms-vscode.remote-repositories
+yzhang.markdown-all-in-one
+octop162.markdown-table-editor
+``` 
+
+この内容を変更すればセットアップする拡張機能を変更できます。
+拡張機能の名前は、一度手動でセットアップした後、vscodeフォルダのある場所で、次のコマンドを実行するとわかります。
+
+```
+.\vscode\bin\code.cmd --list-extensions
+```
+
+これで名前を調べて、cleanExtention.txtに追加するなどしてください。
+
+## Pythonライブラリの編集
+ 
+ スクリプトの85行目以降に、インストールする項目が並んでいます。
+ 
+ ``` 
+# pipのアップグレード
+Write-Host "  pip をアップグレード中..."
+& ".\python\python.exe" -m pip install --upgrade pip
+
+# wheelのインストール
+Write-Host "  wheel をインストール中..."
+& ".\python\python.exe" -m pip install wheel
+
+# コード整形・静的解析ツール
+Write-Host "  [1/17] コード整形・解析ツールをインストール中..."
+& ".\python\python.exe" -m pip install black pylint flake8 autopep8 isort mypy
+
+# ユーティリティ系
+Write-Host "  [2/17] ユーティリティをインストール中..."
+& ".\python\python.exe" -m pip install requests python-dotenv tqdm colorama
+
+--- 以下省略 ---
+ ``` 
+ 
+ この例にならって、追加したいライブラリを記述してください。
+ 
+ 　インストール後の追加などは、VSCodeで、［表示］メニューから［ターミナル］を開くと、pipコマンドでライブラリの追加や削除ができます。
+  ただし、**python -m pip ～**のように、python経由で実行してください。pipは、環境を生成した時のPythonのパスを記憶しているので、環境を移動している場合は、pip単体で起動すると動作しないからです。
+  
+  次はpip listを実行してみた例です。
+ 
+![15.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/c924eb18-f0ab-46d9-b89b-4ee79fd4864c.png)  
 
 ### 追記:
+
+#### 2026-05-20
+READMEを更新しました。同時に、GitHubセットアップガイドを追加しました。
+
 #### 2026-04-18
 Pythonのバージョンを3.13に変更しました。
 また、拡張機能にMarkdown関連を追加しました。
+
 #### 2025-12-27
 tcl/tkはポータブル版のPythonからは削除されていて使えないようになっています。
 そこで、非ポータブル版のpythonからtcl/tkの関連コードをコピーすることにより使えるようにしました。
