@@ -39,7 +39,7 @@ published: true
   │    ├─.github 　Copolot がコードを生成する時に参照するガイドラインのファイルがある
   │    ├─.vscode
   │    │      ├─locale.json	　　　日本語モードの指定
-  │    │      ├─settings.json		V　Scode の設定
+  │    │      ├─settings.json		VS Code の設定
   │    │      ├─extensions.json 　推奨する拡張機能（ただし、未使用）
   │    │      └─launch.json 　　　デバック実行の設定
   │    └─sample
@@ -60,7 +60,7 @@ published: true
   ├─python
   ├─vscode
   ├─workspace
-  │    ├─.github 　Copolot がコードを生成する時に参照するガイドラインのファイルがある
+  │    ├─.github Copolot がコードを生成する時に参照するガイドラインのファイルがある
   │    └─sample
   │          ├─sample.ipynb　サンプルのJupyter Notebookファイル
   │          └─sample.py	　　サンプルのPythonソースコード
@@ -80,7 +80,7 @@ launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って
 3. 作成されたショートカットを右ボタンでクリックし［プロパティ］をクリックします。
 4. プロパティダイアログが開くので、下の方にある［アイコンの変更］ボタンを押します。
 5. アイコンの変更ダイアログが開くので［参照］ボタンを押します。
-6. vscodeフォルダの中にある［Code.exe］をクリックして［開く］ボタンを押します。
+6. portable-python-vscodeフォルダのvscodeフォルダの中にある［Code.exe］をクリックして［開く］ボタンを押します。
 7. ［OK］ボタンを押してプロパティダイアログに戻ります
 8. ［OK］ボタンを押します
 9. エクスプロラーに戻ります。
