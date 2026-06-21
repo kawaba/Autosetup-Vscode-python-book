@@ -129,7 +129,7 @@ launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って
 <br>なお、sample.ipynbファイルは、Jupyter Notebookのファイルです。開いて確認してください。
 
 <img src="https://k-webs.jp/python/images/jupyter.png" width="900">
-
+![Jupyter Notebook](img/jupyter.png.png)
 
 ### (3) GitHub Copilotを使えるようにする
 
