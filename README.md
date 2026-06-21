@@ -105,7 +105,7 @@ launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って
  - sampleフォルダの中の**sample.py**を開きます
  - すると、右下にPythonを選択するウィンドウが開くので、［Python インタープリタの選択］のボタンをクリックします
  　
-![12.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/490b5aec-37dd-4a07-b051-67f80224ae6e.png)
+<img src="https://k-webs.jp/python/images/select-interpreter.png" width="900">
  
 ④選択ウィンドウが開くので、［python.defaultInterpreterPath 設定でPythonを使用する･･･］ をクリックします
 　
