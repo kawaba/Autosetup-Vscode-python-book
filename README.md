@@ -1,6 +1,6 @@
 ---
 title: "スクリプトで完全ポータブルな VSCode＋Python＋Copilot を自動生成する"
-emoji: "🐍"
+License: "本リポジトリのソースコードの著作権は作者に帰属します。作者の許可なく、ソースコードの再配布、転載、販売、または別リポジトリへの公開を禁止します。"
 type: "tech"
 topics: ["python", "VScode", "portable", "CoPilot", "Script"]
 published: true
