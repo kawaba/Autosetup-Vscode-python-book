@@ -3,7 +3,7 @@
 書籍『わかりやすいPython』の読者向けセットアップスクリプトです。
 ※書籍と関係なく利用する場合は、インストール後にworkspace/.github フォルダを削除してください。
 
-**2026-07版** ｜ 最新版は https://github.com/kawaba/Autosetup-Vscode-python-book で確認してください
+**2026-07版** ｜ 最新版は https://github.com/kawaba/Autosetup-Vscode-python-book で確認してください。
 ライセンスは [LICENSE.md](LICENSE.md) をご覧ください。
 
 ## セットアップの手順
