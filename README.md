@@ -1,7 +1,7 @@
 # スクリプトで完全ポータブルな VSCode＋Python＋Copilot を自動生成する
 
 書籍『わかりやすいPython』の読者向けセットアップスクリプトです。
-※一般の利用にはインストール後にworkspace/.github フォルダを削除してください。
+※書籍と関係なく利用する場合は、インストール後にworkspace/.github フォルダを削除してください。
 
 **2026-07版** ｜ 最新版は https://github.com/kawaba/Autosetup-Vscode-python-book で確認してください
 ライセンスは [LICENSE.md](LICENSE.md) をご覧ください。
