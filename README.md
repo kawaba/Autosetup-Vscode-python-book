@@ -5,15 +5,12 @@ type: "tech"
 topics: ["python", "VScode", "portable", "CoPilot", "Script"]
 published: true
 ---
-## インストールなしで使えるPython環境
-　Pythonを学ぶためには、**Pythonインタープリタ**はもちろんですが、IDEも必要です。最近は、（IDEではありませんが）**VS Code**がよく使われています。また、学習の初期段階で、小さなコードを試すには、**Jupyter Notebook**がとても便利です。
- 
-　そして、AIも使えないと困りますね。定番は**GitHub Copilot**です。学生さんなら、（申請さえすれば）無料でProバージョンが使えます。AIもGPT-codexやGemini、Claudeなどの最新版を使えるようになります。
-
-　そこで、これらをまとめてセットアップするスクリプトを作成しました。完全にポータブルな環境が5～10分程度で生成されます。ポータブルですから、インストールなしで、スクリプトの実行が終わったらそのまま実行できます。**仮想環境も必要ありません**。スクリプトで必要なだけ環境を作れるからです。いくつ環境を作っても、互いに影響しません。
-
 ## セットアップの手順
-### 1. GitHubからダウンロードしてスクリプトを起動する
+### 1. インストールなしで使えるPython環境
+　Pythonを学ぶためには、**Pythonインタープリタ**はもちろんですが、IDEも必要です。最近は、（IDEではありませんが）**VS Code**がよく使われています。また、学習の初期段階で、小さなコードを試すには、**Jupyter Notebook**がとても便利です。そして、AIも使えないと困りますね。定番は**GitHub Copilot**です。
+　そこで、これらをまとめてセットアップするスクリプトを作成しました。完全にポータブルな環境が10～15分程度で生成されます。ポータブルですから、インストールなしで、スクリプトの実行が終わったらそのまま実行できます。**仮想環境も必要ありません**。スクリプトで必要なだけ環境を作れるからです。いくつ環境を作っても、互いに影響しません。
+
+### 2. GitHubからダウンロードしてスクリプトを起動する
 スクリプト等はGitHubにあります。次からダウンロードまたはgitで入手してください
 
 - [GitHubを開く](https://github.com/kawaba/Autosetup-Vscode-python)
@@ -50,7 +47,7 @@ published: true
   └─setup.ps1	　　セットアップスクリプト（本体）
 ``` 
 
-### 2. セットアップ後のディレクトリとファイルの構成 
+### 3. セットアップ後のディレクトリとファイルの構成 
 完了後のディレクトリとファイル構成は次のようになります。
 セットアップ用のファイルは削除されてなくなります。
 起動用のバッチファイルhは**launch-vscode.bat**です。
@@ -69,7 +66,7 @@ published: true
 （注）.vscodeフォルダはworkspace内に残っていますが、VS Code上では表示されないので、上図では表記を省略しています。
 
 
-### 3. 起動用アイコンの作成
+### 4. 起動用アイコンの作成
 launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って反映します。
 必ず**launch-vscode.bat**を使って起動してください。
 
@@ -91,7 +88,7 @@ launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って
 ### (1) **launch-vscode.bat**か起動用アイコンをダブルクリックして起動します。
 最初の起動では、GitHub Copilotにサインインする画面が表示されますが、後で行うことにして、右上の×印をクリックして閉じます。
 
-<img src="https://k-webs.jp/python/images/sign-in.png" width="900">
+![右上の×印をクリック](img/sign-in.png)
 
 <br>ここで、拡張機能がロードされるタイミングが遅れて、英語モードの表示になる場合があります。
 
@@ -129,7 +126,7 @@ launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って
 <br>なお、sample.ipynbファイルは、Jupyter Notebookのファイルです。開いて確認してください。
 
 <img src="https://k-webs.jp/python/images/jupyter.png" width="900">
-
+![Jupyter Notebook](img/jupyter.png.png)
 
 ### (3) GitHub Copilotを使えるようにする
 
