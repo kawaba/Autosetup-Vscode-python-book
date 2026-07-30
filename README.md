@@ -1,9 +1,11 @@
 ---
-title: "スクリプトで完全ポータブルな VSCode＋Python＋Copilot を自動生成する"
-License: "本リポジトリのソースコードの著作権は作者に帰属します。作者の許可なく、ソースコードの再配布、転載、販売、または別リポジトリへの公開を禁止します。"
-type: "tech"
-topics: ["python", "VScode", "portable", "CoPilot", "Script"]
-published: true
+# スクリプトで完全ポータブルな VSCode＋Python＋Copilot を自動生成する
+
+**2026-07版** ｜ 最新版は https://github.com/kawaba/Autosetup-Vscode-python-book で確認してください
+ライセンスは [LICENSE.md](LICENSE.md) をご覧ください。
+
+## セットアップの手順
+...
 ---
 ## セットアップの手順
 ### 1. インストールなしで使えるPython環境
