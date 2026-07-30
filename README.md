@@ -1,12 +1,10 @@
----
 # スクリプトで完全ポータブルな VSCode＋Python＋Copilot を自動生成する
+
+書籍『(書名)』の読者向けセットアップスクリプトです。
 
 **2026-07版** ｜ 最新版は https://github.com/kawaba/Autosetup-Vscode-python-book で確認してください
 ライセンスは [LICENSE.md](LICENSE.md) をご覧ください。
 
-## セットアップの手順
-...
----
 ## セットアップの手順
 ### 1. インストールなしで使えるPython環境
 　Pythonを学ぶためには、**Pythonインタープリタ**はもちろんですが、IDEも必要です。最近は、（IDEではありませんが）**VS Code**がよく使われています。また、学習の初期段階で、小さなコードを試すには、**Jupyter Notebook**がとても便利です。そして、AIも使えないと困りますね。定番は**GitHub Copilot**です。
