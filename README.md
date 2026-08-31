@@ -102,6 +102,9 @@ launch-vscode.batは、起動時に、.vscode/settings.json等を読み取って
  <img src="https://k-webs.jp/python/images/japanese-mode.png" width="900">
 
 ### (2) VScodeにPythonインタープリタを認識させます。
+【注意】すでにPythonがインストールされている場合は、あらかじめ削除しておいてください。
+<br>　　　　削除しないとインストール済みのPythonインタープリタが自動的に使われます。
+
 ①sampleフォルダの中の**sample.py**を開きます
 <br>②すると、右下にPythonを選択するウィンドウが開くので、［Python インタープリタの選択］のボタンをクリックします<br>
  　
