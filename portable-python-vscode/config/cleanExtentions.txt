@@ -1,7 +1,5 @@
 ﻿esbenp.prettier-vscode
 github.codespaces
-github.copilot
-github.copilot-chat
 github.remotehub
 github.vscode-github-actions
 ms-ceintl.vscode-language-pack-ja

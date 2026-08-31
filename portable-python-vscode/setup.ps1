@@ -5,6 +5,113 @@
 $ErrorActionPreference = "Stop"
 $ProgressPreference = 'SilentlyContinue'  # 高速化
 
+# ============================================================
+# ログ機構（外部コマンドの出力・終了コードを確実に記録する）
+# ============================================================
+
+$script:LogPath   = Join-Path $PSScriptRoot "setup-log.txt"
+$script:ErrorList = New-Object System.Collections.ArrayList
+
+function Write-Log {
+    param([string]$Message, [string]$Level = "INFO")
+    $line = "{0} [{1}] {2}" -f (Get-Date -Format "HH:mm:ss"), $Level, $Message
+    try { Add-Content -Path $script:LogPath -Value $line -Encoding UTF8 } catch { }
+}
+
+# 画面とログの両方に出す
+function Write-Both {
+    param([string]$Message, [string]$Color = "White")
+    Write-Host $Message -ForegroundColor $Color
+    Write-Log $Message
+}
+
+# 外部プログラム（python.exe / code.cmd 等）の実行ラッパー
+#   - 標準出力・標準エラーをすべてログへ
+#   - 終了コードが 0 以外なら「失敗」として画面に赤字表示＋一覧に記録
+function Invoke-Logged {
+    param(
+        [string]$Label,
+        [string]$FilePath,
+        [string[]]$ArgList = @()
+    )
+
+    Write-Log "実行: $FilePath $($ArgList -join ' ')" "EXEC"
+
+    # 外部コマンドの stderr は ErrorActionPreference=Stop だと例外化するため一時的に解除
+    $prevEAP = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    $global:LASTEXITCODE = 0
+    try {
+        $output = & $FilePath @ArgList 2>&1
+        $code   = $LASTEXITCODE
+    } catch {
+        $output = $_.Exception.Message
+        $code   = -1
+    } finally {
+        $ErrorActionPreference = $prevEAP
+    }
+
+    foreach ($line in $output) {
+        $text = if ($line -is [System.Management.Automation.ErrorRecord]) { $line.ToString() } else { [string]$line }
+        if ($text.Trim() -ne "") { Write-Log ("    " + $text) }
+    }
+
+    if ($code -ne 0) {
+        Write-Host "  × 失敗: $Label (終了コード $code)" -ForegroundColor Red
+        Write-Host "    → 詳細は setup-log.txt を確認してください" -ForegroundColor Yellow
+        Write-Log "失敗: $Label (終了コード $code)" "ERROR"
+        [void]$script:ErrorList.Add("$Label (終了コード $code)")
+    } else {
+        Write-Log "成功: $Label" "OK"
+    }
+    return $code
+}
+
+# ダウンロード（失敗しても止めずに記録する）
+function Invoke-Download {
+    param([string]$Label, [string]$Uri, [string]$OutFile)
+    Write-Log "ダウンロード: $Label <- $Uri" "EXEC"
+    try {
+        Invoke-WebRequest -Uri $Uri -OutFile $OutFile -UseBasicParsing
+        Write-Log "成功: $Label" "OK"
+        return $true
+    } catch {
+        Write-Host "  × ダウンロード失敗: $Label" -ForegroundColor Red
+        Write-Log "ダウンロード失敗: $Label / $($_.Exception.Message)" "ERROR"
+        [void]$script:ErrorList.Add("ダウンロード失敗: $Label")
+        return $false
+    }
+}
+
+# ログを初期化
+try {
+    "" | Out-File -FilePath $script:LogPath -Encoding UTF8 -Force
+} catch {
+    # 別プロセス(Start-Transcript 等)がファイルを掴んでいる場合は別名にする
+    $script:LogPath = Join-Path $PSScriptRoot "setup-log-detail.txt"
+    "" | Out-File -FilePath $script:LogPath -Encoding UTF8 -Force
+}
+Write-Log "==================== セットアップ開始 ===================="
+Write-Log "日時         : $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+Write-Log "実行フォルダ : $PSScriptRoot"
+Write-Log "PSVersion    : $($PSVersionTable.PSVersion)"
+Write-Log "OS           : $([System.Environment]::OSVersion.VersionString)"
+Write-Log "コンピュータ : $env:COMPUTERNAME / ユーザー: $env:USERNAME"
+Write-Log "=========================================================="
+
+# 想定外の中断（ダウンロード失敗など）もログに残す
+trap {
+    Write-Log "予期しないエラー: $($_.Exception.Message)" "FATAL"
+    Write-Log "発生位置: $($_.InvocationInfo.PositionMessage)" "FATAL"
+    Write-Host ""
+    Write-Host "  ×××  予期しないエラーで中断しました  ×××" -ForegroundColor Red
+    Write-Host "  $($_.Exception.Message)" -ForegroundColor Red
+    Write-Host "  詳細は setup-log.txt を確認してください" -ForegroundColor Yellow
+    Write-Host ""
+    $null = Read-Host "終了するには Enter キーを押してください"
+    exit 1
+}
+
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host " Portable Python + VS Code 環境セットアップ開始" -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
@@ -74,7 +181,9 @@ if (Test-Path $pythonDir) {
     Write-Host "  ○ Pythonは既に存在します。スキップします。" -ForegroundColor Yellow
 } else {
     Write-Host "  ダウンロード中: $pythonUrl"
-    Invoke-WebRequest -Uri $pythonUrl -OutFile $pythonZip
+    if (-not (Invoke-Download "ポータブルPython本体" $pythonUrl $pythonZip)) {
+        throw "Python本体のダウンロードに失敗しました。ネットワーク接続を確認してください。"
+    }
     
     Write-Host "  展開中..."
     Expand-Archive -Path $pythonZip -DestinationPath $pythonDir -Force
@@ -111,6 +220,7 @@ function Write-TkLog {
     param([string]$msg)
     $time = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     "$time $msg" | Out-File -FilePath $tkLog -Append -Encoding UTF8
+    Write-Log $msg "TK"
 }
 
 try {
@@ -120,7 +230,9 @@ try {
     if (!(Test-Path $fullDir)) {
         Write-Host "  フル版Python(ZIP)をダウンロード中..." -ForegroundColor Gray
         $url = "https://www.python.org/ftp/python/3.13.13/python-3.13.13-amd64.zip"
-        Invoke-WebRequest -Uri $url -OutFile $fullZip
+        if (-not (Invoke-Download "フル版Python(Tcl/Tk用)" $url $fullZip)) {
+            throw "フル版Pythonのダウンロードに失敗しました"
+        }
 
         Write-Host "  展開中..." -ForegroundColor Gray
         Expand-Archive -Path $fullZip -DestinationPath $fullDir -Force
@@ -165,44 +277,21 @@ $getPipUrl = "https://bootstrap.pypa.io/get-pip.py"
 $getPipFile = "get-pip.py"
 
 Write-Host "  get-pip.py をダウンロード中..."
-Invoke-WebRequest -Uri $getPipUrl -OutFile $getPipFile
+if (-not (Invoke-Download "get-pip.py" $getPipUrl $getPipFile)) {
+    throw "get-pip.py のダウンロードに失敗しました。ネットワーク接続を確認してください。"
+}
 
 Write-Host "  pip をインストール中..."
-& ".\python\python.exe" $getPipFile --no-warn-script-location
+Invoke-Logged "$getPipFile --no-warn-script-location" ".\python\python.exe" @($getPipFile, "--no-warn-script-location") | Out-Null
 
 Write-Host "  pipのバージョン確認:"
-& ".\python\python.exe" -m pip --version
+Invoke-Logged "-m pip --version" ".\python\python.exe" @("-m", "pip", "--version") | Out-Null
 
 Write-Host "  pipのインストール完了" -ForegroundColor Green
 Write-Host ""
 
 # ============================================================
 # 3. Pythonライブラリのインストール
-# ============================================================
-
-Write-Host "[3/5] Pythonライブラリをインストール中..." -ForegroundColor Green
-$env:PATH = "$PWD\python;$PWD\python\Scripts;$env:PATH"
-
-& ".\python\python.exe" -m pip install --upgrade pip
-& ".\python\python.exe" -m pip install wheel
-& ".\python\python.exe" -m pip install build
-& ".\python\python.exe" -m pip install black pylint flake8 autopep8 isort mypy
-& ".\python\python.exe" -m pip install requests python-dotenv tqdm colorama
-& ".\python\python.exe" -m pip install --only-binary :all: numpy pandas matplotlib scipy seaborn
-& ".\python\python.exe" -m pip install flask fastapi uvicorn beautifulsoup4 lxml
-& ".\python\python.exe" -m pip install openpyxl pillow pyyaml pytest faker
-& ".\python\python.exe" -m pip install notebook jupyterlab ipykernel ipywidgets
-& ".\python\python.exe" -m pip install jupyterlab-lsp python-lsp-server
-& ".\python\python.exe" -m pip install plotly xlsxwriter
-& ".\python\python.exe" -m pip install streamlit debugpy pygame arcade pyglet
-& ".\python\python.exe" -m pip install scikit-learn statsmodels sqlalchemy psycopg2-binary
-& ".\python\python.exe" -m pip install pydantic httpx janome rich
-& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/tkxlib-2.0.1-py3-none-any.whl
-
-Write-Host ""
-
-# ============================================================
-# 4. Pythonライブラリのインストール
 # ============================================================
 
 Write-Host "[3/5] Pythonライブラリをインストール中..." -ForegroundColor Green
@@ -214,79 +303,79 @@ $env:PATH = "$PWD\python;$PWD\python\Scripts;$env:PATH"
 
 # pipのアップグレード
 Write-Host "  pip をアップグレード中..."
-& ".\python\python.exe" -m pip install --upgrade pip
+Invoke-Logged "-m pip install --upgrade pip" ".\python\python.exe" @("-m", "pip", "install", "--upgrade", "pip") | Out-Null
 
 # wheelのインストール
 Write-Host "  wheel をインストール中..."
-& ".\python\python.exe" -m pip install wheel
+Invoke-Logged "-m pip install wheel" ".\python\python.exe" @("-m", "pip", "install", "wheel") | Out-Null
 
 # コード整形・静的解析ツール
 Write-Host "  [1/17] コード整形・解析ツールをインストール中..."
-& ".\python\python.exe" -m pip install black pylint flake8 autopep8 isort mypy
+Invoke-Logged "-m pip install black pylint flake8 autopep8 isort mypy" ".\python\python.exe" @("-m", "pip", "install", "black", "pylint", "flake8", "autopep8", "isort", "mypy") | Out-Null
 
 # ユーティリティ系
 Write-Host "  [2/17] ユーティリティをインストール中..."
-& ".\python\python.exe" -m pip install requests python-dotenv tqdm colorama
+Invoke-Logged "-m pip install requests python-dotenv tqdm colorama" ".\python\python.exe" @("-m", "pip", "install", "requests", "python-dotenv", "tqdm", "colorama") | Out-Null
 
 # 数値・統計・可視化
 Write-Host "  [3/17] 数値計算・可視化ライブラリをインストール中..."
-& ".\python\python.exe" -m pip install --only-binary :all: numpy pandas matplotlib scipy seaborn
+Invoke-Logged "-m pip install --only-binary :all: numpy pandas matplotlib scipy seaborn" ".\python\python.exe" @("-m", "pip", "install", "--only-binary", ":all:", "numpy", "pandas", "matplotlib", "scipy", "seaborn") | Out-Null
 
 # Web開発
 Write-Host "  [4/17] Web開発ライブラリをインストール中..."
-& ".\python\python.exe" -m pip install flask requests fastapi uvicorn beautifulsoup4 lxml
+Invoke-Logged "-m pip install flask requests fastapi uvicorn beautifulsoup4 lxml" ".\python\python.exe" @("-m", "pip", "install", "flask", "requests", "fastapi", "uvicorn", "beautifulsoup4", "lxml") | Out-Null
 
 # Excel・画像・テスト
 Write-Host "  [5/17] Excel・画像処理・テストライブラリをインストール中..."
-& ".\python\python.exe" -m pip install openpyxl pillow pyyaml pytest faker
+Invoke-Logged "-m pip install openpyxl pillow pyyaml pytest faker" ".\python\python.exe" @("-m", "pip", "install", "openpyxl", "pillow", "pyyaml", "pytest", "faker") | Out-Null
 
 # Jupyter Notebook
 Write-Host "  [6/17] Jupyter Notebookをインストール中..."
-& ".\python\python.exe" -m pip install notebook jupyterlab ipykernel ipywidgets
+Invoke-Logged "-m pip install notebook jupyterlab ipykernel ipywidgets" ".\python\python.exe" @("-m", "pip", "install", "notebook", "jupyterlab", "ipykernel", "ipywidgets") | Out-Null
 
 # Jupyter LSP
 Write-Host "  [7/17] Jupyter LSPをインストール中..."
-& ".\python\python.exe" -m pip install jupyterlab-lsp python-lsp-server
+Invoke-Logged "-m pip install jupyterlab-lsp python-lsp-server" ".\python\python.exe" @("-m", "pip", "install", "jupyterlab-lsp", "python-lsp-server") | Out-Null
 
 # グラフ・Excel出力拡張
 Write-Host "  [8/17] グラフ・Excel出力ライブラリをインストール中..."
-& ".\python\python.exe" -m pip install plotly xlsxwriter
+Invoke-Logged "-m pip install plotly xlsxwriter" ".\python\python.exe" @("-m", "pip", "install", "plotly", "xlsxwriter") | Out-Null
 
 # streamlit 関係
 Write-Host "  [9/17] グラフ・streamlit関連ライブラリをインストール中..."
-& ".\python\python.exe" -m pip install streamlit requests
+Invoke-Logged "-m pip install streamlit requests" ".\python\python.exe" @("-m", "pip", "install", "streamlit", "requests") | Out-Null
 
 # その他（settings.jsonで参照されているもの）
 Write-Host "  [10/17] その他必要なライブラリをインストール中..."
-& ".\python\python.exe" -m pip install debugpy
+Invoke-Logged "-m pip install debugpy" ".\python\python.exe" @("-m", "pip", "install", "debugpy") | Out-Null
 
 # ゲーム開発
 Write-Host "  [11/17] ゲーム開発ライブラリをインストール中..."
-& ".\python\python.exe" -m pip install pygame arcade pyglet
+Invoke-Logged "-m pip install pygame arcade pyglet" ".\python\python.exe" @("-m", "pip", "install", "pygame", "arcade", "pyglet") | Out-Null
 
 # 機械学習・データサイエンス
 Write-Host "  [12/17] 機械学習ライブラリをインストール中..."
-& ".\python\python.exe" -m pip install scikit-learn statsmodels
+Invoke-Logged "-m pip install scikit-learn statsmodels" ".\python\python.exe" @("-m", "pip", "install", "scikit-learn", "statsmodels") | Out-Null
 
 # データベース・ORM
 Write-Host "  [13/17] データベースライブラリをインストール中..."
-& ".\python\python.exe" -m pip install sqlalchemy psycopg2-binary
+Invoke-Logged "-m pip install sqlalchemy psycopg2-binary" ".\python\python.exe" @("-m", "pip", "install", "sqlalchemy", "psycopg2-binary") | Out-Null
 
 # API開発強化
 Write-Host "  [14/17] API開発強化ライブラリをインストール中..."
-& ".\python\python.exe" -m pip install pydantic httpx
+Invoke-Logged "-m pip install pydantic httpx" ".\python\python.exe" @("-m", "pip", "install", "pydantic", "httpx") | Out-Null
 
 # 日本語処理
 Write-Host "  [15/17] 日本語処理ライブラリをインストール中..."
-& ".\python\python.exe" -m pip install janome
+Invoke-Logged "-m pip install janome" ".\python\python.exe" @("-m", "pip", "install", "janome") | Out-Null
 
 # ターミナル出力
 Write-Host "  [16/17] ターミナル出力ライブラリをインストール中..."
-& ".\python\python.exe" -m pip install rich
+Invoke-Logged "-m pip install rich" ".\python\python.exe" @("-m", "pip", "install", "rich") | Out-Null
 
 # tkxlibのインストール
 Write-Host "  [17/17] tkxlib （教材ツール）をインストール中..."
-& ".\python\python.exe" -m pip install https://k-webs.jp/lib/python/tkxlib-2.0.1-py3-none-any.whl
+Invoke-Logged "-m pip install https://k-webs.jp/lib/python/tkxlib-2.0.1-py3-none-any.whl" ".\python\python.exe" @("-m", "pip", "install", "https://k-webs.jp/lib/python/tkxlib-2.0.1-py3-none-any.whl") | Out-Null
 
 Write-Host "  Pythonライブラリのインストール完了" -ForegroundColor Green
 Write-Host ""
@@ -305,7 +394,9 @@ if (Test-Path $vscodeDir) {
     Write-Host "  ○ VS Codeは既に存在します。スキップします。" -ForegroundColor Yellow
 } else {
     Write-Host "  ダウンロード中（サイズが大きいため時間がかかります）..."
-    Invoke-WebRequest -Uri $vscodeUrl -OutFile $vscodeZip
+    if (-not (Invoke-Download "VS Code Portable" $vscodeUrl $vscodeZip)) {
+        throw "VS Code のダウンロードに失敗しました。ネットワーク接続を確認してください。"
+    }
     
     Write-Host "  展開中..."
     Expand-Archive -Path $vscodeZip -DestinationPath $vscodeDir -Force
@@ -336,7 +427,7 @@ if (Test-Path $extFile) {
     
     foreach ($ext in $extensions) {
         Write-Host "  [$count/$total] インストール中: $ext"
-        & ".\vscode\bin\code.cmd" --install-extension $ext --force
+        Invoke-Logged "拡張機能 $ext" ".\vscode\bin\code.cmd" @("--install-extension", $ext, "--force") | Out-Null
         $count++
     }
     
@@ -403,7 +494,11 @@ Write-Host ""
 # ============================================================
 
 Write-Host "============================================================" -ForegroundColor Cyan
-Write-Host " セットアップが完了しました！" -ForegroundColor Cyan
+if ($script:ErrorList.Count -eq 0) {
+    Write-Host " セットアップが完了しました！" -ForegroundColor Cyan
+} else {
+    Write-Host " セットアップは終了しましたが、エラーがあります" -ForegroundColor Red
+}
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "次の手順で起動してください:" -ForegroundColor White
@@ -420,6 +515,34 @@ Write-Host ""
 # ============================================================
 # セットアップファイルの自動削除
 # ============================================================
+
+# ============================================================
+# エラーサマリ
+# ============================================================
+
+if ($script:ErrorList.Count -gt 0) {
+    Write-Host ""
+    Write-Host "============================================================" -ForegroundColor Red
+    Write-Host " 【注意】$($script:ErrorList.Count) 件のエラーが発生しました" -ForegroundColor Red
+    Write-Host "============================================================" -ForegroundColor Red
+    foreach ($e in $script:ErrorList) {
+        Write-Host "  ・$e" -ForegroundColor Red
+    }
+    Write-Host ""
+    Write-Host "  詳細は setup-log.txt を確認してください。" -ForegroundColor Yellow
+    Write-Host "  セットアップファイルは削除せずに残します（修正後、再実行できます）。" -ForegroundColor Yellow
+    Write-Host ""
+    Write-Log "エラー合計: $($script:ErrorList.Count) 件" "ERROR"
+    foreach ($e in $script:ErrorList) { Write-Log "  - $e" "ERROR" }
+} else {
+    Write-Log "エラーなしで完了しました" "OK"
+}
+
+# ============================================================
+# セットアップファイルの自動削除（エラーが無い場合のみ）
+# ============================================================
+
+if ($script:ErrorList.Count -eq 0) {
 
 Write-Host "セットアップファイルを削除中..." -ForegroundColor Yellow
 Write-Host ""
@@ -455,6 +578,12 @@ foreach ($item in $itemsToDelete) {
 
 Write-Host ""
 Write-Host "セットアップファイルの削除が完了しました。" -ForegroundColor Green
+
+}
+Write-Host ""
+Write-Log "==================== セットアップ終了 (エラー $($script:ErrorList.Count) 件) ===================="
+Write-Host ""
+Write-Host "  ログ: $script:LogPath" -ForegroundColor Gray
 Write-Host ""
 Write-Host "終了するには何かキーを押してください..." -ForegroundColor White
 try {
@@ -467,4 +596,3 @@ try {
 }
 
 exit 0
-
