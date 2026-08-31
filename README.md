@@ -62,7 +62,9 @@
   │    └─sample
   │          ├─sample.ipynb　サンプルのJupyter Notebookファイル
   │          └─sample.py	　　サンプルのPythonソースコード
-  └─ launch-vscode.bat			VScode起動用バッチファイル
+  ├─ launch-vscode.bat			VScode起動用バッチファイル
+  └─ setup-log.txt			   セットアップログ
+
 ```   
 （注）.vscodeフォルダはworkspace内に残っていますが、VS Code上では表示されないので、上図では表記を省略しています。
 
@@ -357,8 +359,6 @@ config/cleanExtensions.txt
 ```
 esbenp.prettier-vscode
 github.codespaces
-github.copilot
-github.copilot-chat
 github.remotehub
 github.vscode-github-actions
 ms-ceintl.vscode-language-pack-ja
@@ -420,6 +420,10 @@ Write-Host "  [2/17] ユーティリティをインストール中..."
 ![15.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/60058/c924eb18-f0ab-46d9-b89b-4ee79fd4864c.png)  
 
 ### 追記:
+
+#### 2026-08-31
+拡張インストールからcopilot関連を削除しました（VS Codeに含まれるようになったため）。
+インストールログが残るようにしました。エラー発生時はエラーログも出力されます。
 
 #### 2026-05-20
 READMEを更新しました。同時に、GitHubセットアップガイドを追加しました。
