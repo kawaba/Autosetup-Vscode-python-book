@@ -14,8 +14,8 @@
 ### 2. GitHubからダウンロードしてスクリプトを起動する
 スクリプト等はGitHubにあります。次からダウンロードまたはgitで入手してください
 
-- [GitHubを開く](https://github.com/kawaba/autosetup-vscode-python)
-- [zip形式でダウンロードする](https://github.com/kawaba/autosetup-vscode-python/archive/refs/heads/main.zip)
+- [GitHubを開く](https://github.com/kawaba/autosetup-vscode-python-book)
+- [zip形式でダウンロードする](https://github.com/kawaba/autosetup-vscode-python-book/archive/refs/heads/main.zip)
 
 　どこか適切な場所（**ローカルドライブ推奨**）に置いて、**setup.bat**をダブルクリックして実行します。ネットワークの速度にもよりますが、10～15分程度で完了します。具体的には次のようにします。
 
